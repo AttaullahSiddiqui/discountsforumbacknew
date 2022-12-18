@@ -1,5 +1,5 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import {
   NbActionsModule,
   NbLayoutModule,
@@ -12,29 +12,27 @@ import {
   NbSelectModule,
   NbIconModule,
   NbThemeModule,
-} from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbSecurityModule } from '@nebular/security';
+} from "@nebular/theme";
+import { NbEvaIconsModule } from "@nebular/eva-icons";
+import { NbSecurityModule } from "@nebular/security";
 
 import {
   FooterComponent,
   HeaderComponent,
   SearchInputComponent,
   TinyMCEComponent,
-} from './components';
+} from "./components";
 import {
   CapitalizePipe,
   PluralPipe,
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
-} from './pipes';
+} from "./pipes";
 import {
   OneColumnLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
-} from './layouts';
-import { CORPORATE_THEME } from './styles/theme.corporate';
+} from "./layouts";
+import { CORPORATE_THEME } from "./styles/theme.corporate";
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -56,8 +54,8 @@ const COMPONENTS = [
   SearchInputComponent,
   TinyMCEComponent,
   OneColumnLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  // ThreeColumnsLayoutComponent,
+  // TwoColumnsLayoutComponent,
 ];
 const PIPES = [
   CapitalizePipe,
@@ -79,9 +77,9 @@ export class ThemeModule {
       providers: [
         ...NbThemeModule.forRoot(
           {
-            name: 'corporate',
+            name: "corporate",
           },
-          [ CORPORATE_THEME ],
+          [CORPORATE_THEME]
         ).providers,
       ],
     };

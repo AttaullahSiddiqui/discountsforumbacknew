@@ -1,40 +1,28 @@
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { ExtraOptions, RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
 import {
   NbAuthComponent,
   NbLoginComponent,
   NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
+} from "@nebular/auth";
 
 export const routes: Routes = [
+  // {
+  //   path: "pages",
+  //   loadChildren: () =>
+  //     import("./pages/pages.module").then((m) => m.PagesModule),
+  // },
   {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module')
-      .then(m => m.PagesModule),
+    path: "auth",
+    loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
   },
-  {
-    path: 'auth',
-    component: NbAuthComponent,
-    children: [
-      {
-        path: '',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'login',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      }
-    ],
-  },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  // {
+  //   path: "login",
+  //   loadChildren: () =>
+  //     import("./auth/login/login.module").then((m) => m.LoginModule),
+  // },
+  { path: "", redirectTo: "auth", pathMatch: "full" },
+  { path: "**", redirectTo: "auth" },
 ];
 
 const config: ExtraOptions = {
@@ -45,5 +33,4 @@ const config: ExtraOptions = {
   imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
