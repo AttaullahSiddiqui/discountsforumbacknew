@@ -1,9 +1,14 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
 
-import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { PagesComponent } from "./pages.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
+import { AddUserComponent } from "./addUser/adduser.component";
+import { UtilityService } from "../@core/utils/utility.service";
+import { AllUserComponent } from "./allUser/alluser.component";
+import { AllSettingsComponent } from "./allSettings/all-settings.component";
+import { AddCategoryComponent } from "./addcategory/addcategory.component";
 
 const routes: Routes = [
   {
@@ -13,68 +18,31 @@ const routes: Routes = [
       {
         path: "dashboard",
         component: DashboardComponent,
+        canActivate: [UtilityService],
       },
       {
-        path: "layout",
-        loadChildren: () =>
-          import("./layout/layout.module").then((m) => m.LayoutModule),
+        path: "adduser",
+        component: AddUserComponent,
+        canActivate: [UtilityService],
       },
       {
-        path: "forms",
-        loadChildren: () =>
-          import("./forms/forms.module").then((m) => m.FormsModule),
+        path: "alluser",
+        component: AllUserComponent,
+        canActivate: [UtilityService],
       },
       {
-        path: "ui-features",
-        loadChildren: () =>
-          import("./ui-features/ui-features.module").then(
-            (m) => m.UiFeaturesModule
-          ),
+        path: "settings",
+        component: AllSettingsComponent,
+        canActivate: [UtilityService],
       },
       {
-        path: "modal-overlays",
-        loadChildren: () =>
-          import("./modal-overlays/modal-overlays.module").then(
-            (m) => m.ModalOverlaysModule
-          ),
-      },
-      {
-        path: "extra-components",
-        loadChildren: () =>
-          import("./extra-components/extra-components.module").then(
-            (m) => m.ExtraComponentsModule
-          ),
-      },
-      {
-        path: "maps",
-        loadChildren: () =>
-          import("./maps/maps.module").then((m) => m.MapsModule),
-      },
-      {
-        path: "charts",
-        loadChildren: () =>
-          import("./charts/charts.module").then((m) => m.ChartsModule),
-      },
-      {
-        path: "editors",
-        loadChildren: () =>
-          import("./editors/editors.module").then((m) => m.EditorsModule),
-      },
-      {
-        path: "tables",
-        loadChildren: () =>
-          import("./tables/tables.module").then((m) => m.TablesModule),
-      },
-      {
-        path: "miscellaneous",
-        loadChildren: () =>
-          import("./miscellaneous/miscellaneous.module").then(
-            (m) => m.MiscellaneousModule
-          ),
+        path: "addcategory",
+        component: AddCategoryComponent,
+        canActivate: [UtilityService],
       },
       {
         path: "",
-        redirectTo: "dashboard",
+        redirectTo: "/auth",
         pathMatch: "full",
       },
       {
@@ -89,5 +57,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {
-}
+export class PagesRoutingModule {}

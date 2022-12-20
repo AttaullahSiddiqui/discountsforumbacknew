@@ -1,14 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DataService } from "../@core/utils/data.service";
 import { UtilityService } from "../@core/utils/utility.service";
-import {
-  NbComponentStatus,
-  NbGlobalLogicalPosition,
-  NbGlobalPhysicalPosition,
-  NbGlobalPosition,
-  NbToastrService,
-  NbToastrConfig,
-} from "@nebular/theme";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "ngx-auth",
@@ -20,7 +13,8 @@ export class AuthComponent {
 
   constructor(
     private _dataService: DataService,
-    private _utlityService: UtilityService
+    private _utlityService: UtilityService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,21 +23,19 @@ export class AuthComponent {
       this._dataService
         .postAPI("/api/verifyUserToken", { token: checkAuth })
         .subscribe((res) => {
-          // if (res.data) this.router.navigateByUrl("/dashboard");
-          if (res.data) console.log("ALready logged in");
+          // if (res.data) this.router.navigateByUrl("/pages/dashboard");
         });
     }
   }
 
   authUser(userInfo) {
-    console.log(userInfo);
     this._dataService.postAPI("/api/login", userInfo).subscribe((res) => {
       if (res.data) {
         this._utlityService.setToken(res.data);
-        // this.router.navigateByUrl("/dashboard");
-        console.log("Logged In", "Success");
+        this.router.navigateByUrl("/pages/dashboard");
+        this._dataService.showSuccessToast("Logged In");
       } else {
-        console.log(res["message"], "Error");
+        this._dataService.showErrorToast(res["message"]);
       }
     });
   }

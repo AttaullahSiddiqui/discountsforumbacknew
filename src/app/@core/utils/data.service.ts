@@ -4,10 +4,22 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Observable, Subject } from "rxjs";
 import { delay, shareReplay, debounceTime } from "rxjs/operators";
+import {
+  NbComponentStatus,
+  NbGlobalLogicalPosition,
+  NbGlobalPhysicalPosition,
+  NbGlobalPosition,
+  NbToastrService,
+  NbToastrConfig,
+} from "@nebular/theme";
 
 @Injectable()
 export class DataService {
-  constructor(private _http: HttpClient) {}
+  config: NbToastrConfig;
+  constructor(
+    private _http: HttpClient,
+    private toastrService: NbToastrService
+  ) {}
   fetchAPI(url) {
     return this._http
       .get(url)
@@ -75,5 +87,29 @@ export class DataService {
     return this._http
       .post("/api/register", userInfo)
       .pipe(map((res) => JSON.parse(JSON.stringify(res))));
+  }
+  showSuccessToast(content: string) {
+    const config = {
+      status: "success",
+      destroyByClick: true,
+      duration: 3000,
+      hasIcon: true,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+      preventDuplicates: false,
+    };
+
+    this.toastrService.show("Success", `${content}`, config);
+  }
+  showErrorToast(content: string) {
+    const config = {
+      status: "danger",
+      destroyByClick: true,
+      duration: 3000,
+      hasIcon: true,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+      preventDuplicates: false,
+    };
+
+    this.toastrService.show("Error", `${content}`, config);
   }
 }

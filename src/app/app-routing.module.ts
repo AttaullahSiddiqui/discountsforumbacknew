@@ -7,11 +7,11 @@ import {
 } from "@nebular/auth";
 
 export const routes: Routes = [
-  // {
-  //   path: "pages",
-  //   loadChildren: () =>
-  //     import("./pages/pages.module").then((m) => m.PagesModule),
-  // },
+  {
+    path: "pages",
+    loadChildren: () =>
+      import("./pages/pages.module").then((m) => m.PagesModule),
+  },
   {
     path: "auth",
     loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
@@ -21,8 +21,8 @@ export const routes: Routes = [
   //   loadChildren: () =>
   //     import("./auth/login/login.module").then((m) => m.LoginModule),
   // },
-  { path: "", redirectTo: "auth", pathMatch: "full" },
-  { path: "**", redirectTo: "auth" },
+  { path: "", redirectTo: "pages", pathMatch: "full" },
+  { path: "**", redirectTo: "pages" },
 ];
 
 const config: ExtraOptions = {

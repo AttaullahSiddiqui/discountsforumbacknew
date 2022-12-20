@@ -62,6 +62,7 @@ import { VisitorsAnalyticsService } from "./mock/visitors-analytics.service";
 import { SecurityCamerasService } from "./mock/security-cameras.service";
 import { MockDataModule } from "./mock/mock-data.module";
 import { DataService } from "./utils/data.service";
+import { UtilityService } from "./utils/utility.service";
 
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
@@ -99,6 +100,7 @@ export const NB_CORE_PROVIDERS = [
   ...MockDataModule.forRoot().providers,
   ...DATA_SERVICES,
   DataService,
+  UtilityService,
   ...NbAuthModule.forRoot({}).providers,
 
   NbSecurityModule.forRoot({

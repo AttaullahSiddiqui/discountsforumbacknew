@@ -5,6 +5,7 @@
 
 # dependencies
 /node_modules
+/pages_backup
 
 # IDEs and editors
 /.idea

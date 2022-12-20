@@ -3,9 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { DataService } from "./data.service";
 
-@Injectable({
-  providedIn: "root",
-})
+@Injectable()
 export class UtilityService {
   userVar: string = null;
   userData: any = null;

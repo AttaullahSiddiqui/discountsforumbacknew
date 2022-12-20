@@ -1,14 +1,14 @@
 <div class="row">
-  <div class="col-3">
+  <div class="col-xxxl-3 col-md-6">
     <nb-card size="large">
       <nb-tabset fullWidth>
-        <nb-tab tabTitle="Categories">
+        <nb-tab tabTitle="Users">
           <div class="slider-container">
             <ngx-temperature-dragger
-              [(value)]="categories"
-              [(powerIcon)]="categoryIcon"
+              [(value)]="users"
+              [(powerIcon)]="userIcon"
               [min]="0"
-              [max]="200"
+              [max]="20"
               [disableArcColor]="theme.arcEmpty"
               [fillColors]="theme.arcFill"
               [thumbBg]="theme.thumbBg"
@@ -16,9 +16,9 @@
             >
               <div class="slider-value-container">
                 <div class="value h1">
-                  {{ categories }}
+                  {{ users }}
                 </div>
-                <div class="desc">categories</div>
+                <div class="desc">users</div>
               </div>
             </ngx-temperature-dragger>
           </div>
@@ -26,7 +26,7 @@
       </nb-tabset>
     </nb-card>
   </div>
-  <div class="col-3">
+  <div class="col-xxxl-3 col-md-6">
     <nb-card size="large">
       <nb-tabset fullWidth>
         <nb-tab tabTitle="Stores">
@@ -53,7 +53,7 @@
       </nb-tabset>
     </nb-card>
   </div>
-  <div class="col-3">
+  <div class="col-xxxl-3 col-md-6">
     <nb-card size="large">
       <nb-tabset fullWidth>
         <nb-tab tabTitle="Coupons">
@@ -62,7 +62,7 @@
               [(value)]="coupons"
               [(powerIcon)]="couponIcon"
               [min]="0"
-              [max]="4000"
+              [max]="50000"
               [disableArcColor]="theme.arcEmpty"
               [fillColors]="'#ff708d'"
               [thumbBg]="theme.thumbBg"
@@ -80,7 +80,7 @@
       </nb-tabset>
     </nb-card>
   </div>
-  <div class="col-3">
+  <div class="col-xxxl-3 col-md-6">
     <nb-card size="large">
       <nb-tabset fullWidth>
         <nb-tab tabTitle="Blogs">
@@ -89,7 +89,7 @@
               [(value)]="blogs"
               [(powerIcon)]="blogIcon"
               [min]="0"
-              [max]="100"
+              [max]="50"
               [disableArcColor]="theme.arcEmpty"
               [fillColors]="'#42aaff'"
               [thumbBg]="theme.thumbBg"

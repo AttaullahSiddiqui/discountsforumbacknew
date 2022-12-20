@@ -12,18 +12,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: "Add User",
-        link: "/pages/layout/stepper",
+        link: "/pages/adduser",
       },
       {
         title: "All User",
-        link: "/pages/layout/list",
+        link: "/pages/alluser",
       },
     ],
   },
   {
     title: "Settings",
     icon: "settings-outline",
-    link: "/pages/iot-dashboard",
+    link: "/pages/settings",
   },
   {
     title: "Data Entry",
@@ -35,11 +35,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: "Add Category",
-        link: "/pages/layout/stepper",
+        link: "/pages/addcategory",
       },
       {
         title: "All Categories",
-        link: "/pages/layout/list",
+        link: "/pages/allcategory",
       },
     ],
   },
