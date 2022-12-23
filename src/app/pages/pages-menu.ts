@@ -39,7 +39,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: "All Categories",
-        link: "/pages/allcategory",
+        link: "/pages/allcategories",
       },
     ],
   },
