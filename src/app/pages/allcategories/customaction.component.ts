@@ -5,7 +5,7 @@ import { ViewCell } from "ng2-smart-table";
 @Component({
   template: `
     <span
-      style="background-color: #564c4c;color: white;padding: 5px 8px; border-radius: 5px;margin-left:25%"
+      style="background-color: #564c4c;color: white;padding: 5px 8px; border-radius: 5px;margin-left:30%"
       >{{ renderValue }}</span
     >
   `,
@@ -17,6 +17,6 @@ export class CustomRenderComponent implements ViewCell, OnInit {
   @Input() rowData: any;
 
   ngOnInit() {
-    this.renderValue = this.value ? "Featured" : "Nil";
+    this.renderValue = this.value ? "Yes" : "No";
   }
 }

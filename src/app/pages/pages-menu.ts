@@ -67,15 +67,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: "Add Coupon",
-        link: "/pages/layout/stepper",
+        link: "/pages/addcoupon",
       },
       {
         title: "All Coupons",
-        link: "/pages/layout/list",
+        link: "/pages/allcoupons",
       },
       {
         title: "Sort Coupons",
-        link: "/pages/layout/list",
+        link: "/pages/sortcoupons",
       },
     ],
   },

@@ -28,7 +28,7 @@ app.use("/api", appRoutes);
 
 // mongoose.connect(CONFIG.local['url'], { useNewUrlParser: true, useCreateIndex: true });
 mongoose.connect(CONFIG.db["production"], {
-  useNewUrlParser: true
+  useNewUrlParser: true,
 });
 mongoose.connection.on("error", (err) => {
   // console.log(`Connection Error on ${mode} ${err}`);

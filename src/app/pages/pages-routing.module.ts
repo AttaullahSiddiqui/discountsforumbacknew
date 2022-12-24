@@ -10,6 +10,7 @@ import { AllUserComponent } from "./allUser/alluser.component";
 import { AllSettingsComponent } from "./allSettings/all-settings.component";
 import { AddCategoryComponent } from "./addcategory/addcategory.component";
 import { AllCategoriesComponent } from "./allcategories/allcategories.component";
+import { AddCouponComponent } from "./addcoupon/addcoupon.component";
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
       {
         path: "allcategories",
         component: AllCategoriesComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "addcoupon",
+        component: AddCouponComponent,
         canActivate: [UtilityService],
       },
       {

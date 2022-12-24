@@ -49,10 +49,10 @@ export class AllCategoriesComponent {
       },
       slug: {
         title: "Slug",
-        type: "boolean",
+        type: "string",
       },
       featuredForHome: {
-        title: "Status",
+        title: "Featured on Home",
         type: "custom",
         renderComponent: CustomRenderComponent,
       },

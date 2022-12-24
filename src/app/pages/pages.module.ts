@@ -11,6 +11,7 @@ import { AllUserModule } from "./allUser/alluser.module";
 import { AllSettingsModule } from "./allSettings/all-settings.module";
 import { AddCategoryModule } from "./addcategory/addcategory.module";
 import { AllCategoriesModule } from "./allcategories/allcategories.module";
+import { AddCouponModule } from "./addcoupon/addcoupon.module";
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { AllCategoriesModule } from "./allcategories/allcategories.module";
     AllSettingsModule,
     AddCategoryModule,
     AllCategoriesModule,
+    AddCouponModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],
