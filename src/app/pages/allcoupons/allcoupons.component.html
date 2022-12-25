@@ -23,6 +23,43 @@
       </nb-card-body>
     </nb-card>
   </div>
+  <div class="col-md-6" *ngIf="dataLoaded">
+    <nb-card>
+      <nb-card-header>Overwrite Date</nb-card-header>
+      <nb-card-body style="padding-top: 10px !important; padding-bottom: 0">
+        <form>
+          <div class="form-group row">
+            <div class="col-sm-9">
+              <input
+                nbInput
+                name="expDate"
+                placeholder="Click to select Date"
+                name="expDate"
+                required
+                [(ngModel)]="overallDate"
+                [nbDatepicker]="formpicker"
+              />
+              <nb-datepicker #formpicker></nb-datepicker>
+            </div>
+            <div class="col-md-3">
+              <button
+                nbButton
+                status="primary"
+                size="medium"
+                [nbSpinner]="overBusy"
+                nbSpinnerStatus="primary"
+                nbSpinnerSize="medium"
+                [disabled]="!overallDate"
+                (click)="changeOverallDate()"
+              >
+                Apply
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>
 
 <nb-card *ngIf="dataLoaded">

@@ -121,21 +121,26 @@ export class AllCouponsComponent {
         }
       });
   }
-  getCategoriesFunc() {
-    if (this.isBusy) return;
-    this.isBusy = true;
+  changeOverallDate() {
+    if (this.overBusy) return;
+    this.overBusy = true;
+    var dateToSave = new Date(this.overallDate).getTime();
     this._dataService
-      .fetchAPIWithLimit("/api/fetchCategories", 0, 100)
+      .postAPI("/api/changeallCouponsDate", {
+        dateToSave: dateToSave,
+        storeId: this.selectedStore,
+      })
       .subscribe((res) => {
+        this.overBusy = false;
         if (res.data) {
-          const data = res.data;
-          this.source.load(data);
+          this._dataService.showSuccessToast(res.message);
+          this.overallDate = null;
+          window.scrollTo(0, 0);
         } else {
           this._dataService.showErrorToast(res.message);
         }
       });
   }
-
   onSaveConfirm(event): void {
     this._dataService
       .postAPI("/api/editCategory", event.newData)
@@ -168,7 +173,7 @@ export class AllCouponsComponent {
   }
   openEditForm(contentTemplate: any) {
     this.windowService.open(contentTemplate, {
-      title: "Edit Form"
+      title: "Edit Form",
     });
   }
   openDeletePrompt(event: any) {
