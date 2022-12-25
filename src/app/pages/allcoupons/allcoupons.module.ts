@@ -5,11 +5,15 @@ import {
   NbButtonModule,
   NbCardModule,
   NbMenuModule,
+  NbPopoverModule,
   NbLayoutModule,
   NbInputModule,
   NbCheckboxModule,
   NbRadioModule,
   NbDatepickerModule,
+  NbSpinnerModule,
+  NbDialogModule,
+  NbWindowModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 import { AllCouponsComponent } from "./allcoupons.component";
@@ -19,10 +23,13 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
 @NgModule({
   imports: [
     NgSelectModule,
+    NbDialogModule.forChild(),
+    NbWindowModule.forChild(),
     FormsModule,
     ReactiveFormsModule,
     NbLayoutModule,
     NbCardModule,
+    NbPopoverModule,
     NbActionsModule,
     NbButtonModule,
     NbInputModule,
@@ -31,6 +38,7 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
     NbActionsModule,
     Ng2SmartTableModule,
     NbCheckboxModule,
+    NbSpinnerModule,
     NbRadioModule,
     NbDatepickerModule,
   ],

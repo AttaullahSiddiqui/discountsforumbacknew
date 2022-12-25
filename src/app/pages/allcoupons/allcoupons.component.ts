@@ -1,6 +1,5 @@
-import { Component, ViewChild, TemplateRef } from "@angular/core";
+import { Component, ViewChild, TemplateRef, Optional } from "@angular/core";
 import { DataService } from "../../@core/utils/data.service";
-import { UtilityService } from "../../@core/utils/utility.service";
 import { LocalDataSource } from "ng2-smart-table";
 import { CustomRenderComponent } from "./customaction.component";
 import { NbWindowService, NbDialogService } from "@nebular/theme";
@@ -12,7 +11,7 @@ import { DeletePromptComponent } from "./delete-prompt/delete-prompt.component";
   templateUrl: "./allcoupons.component.html",
 })
 export class AllCouponsComponent {
-  @ViewChild("contentTemplate", { static: true })
+  @ViewChild("couponEditModal", { static: true })
   contentTemplate: TemplateRef<any>;
   storeArray: {} = null;
   selectedStoreName = "";
@@ -22,13 +21,14 @@ export class AllCouponsComponent {
   isBusy = false;
   dataLoaded = false;
   editObject = {};
-  editKey = "";
+  editKey: any;
   dltIndex: any;
   skipNo = 0;
   searchField = "";
   overallDate: any = null;
   overBusy = false;
   backupArr: any;
+  windowRef: any;
   settings = {
     mode: "external",
     add: {
@@ -56,7 +56,7 @@ export class AllCouponsComponent {
         editable: false,
       },
       offerBox: {
-        title: "Offer",
+        title: "Offer Text",
         type: "string",
       },
       expDate: {
@@ -79,7 +79,7 @@ export class AllCouponsComponent {
   constructor(
     private _dataService: DataService,
     private windowService: NbWindowService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService // @Optional() public windowRef: NbWindowRef
   ) {}
 
   ngOnInit() {
@@ -121,6 +121,15 @@ export class AllCouponsComponent {
         }
       });
   }
+  fetchTrackingLink(id) {
+    this._dataService
+      .fetchAPIUsingId("/api/fetchStoreByIdDuplicate", id)
+      .subscribe((res) => {
+        if (res.data) {
+          this.editObject["trackingLink"] = res.data.trackUrl;
+        } else this._dataService.showErrorToast(res.message);
+      });
+  }
   changeOverallDate() {
     if (this.overBusy) return;
     this.overBusy = true;
@@ -141,18 +150,23 @@ export class AllCouponsComponent {
         }
       });
   }
-  onSaveConfirm(event): void {
-    this._dataService
-      .postAPI("/api/editCategory", event.newData)
-      .subscribe((res) => {
-        if (res.data) {
-          this._dataService.showSuccessToast(res.message);
-          event.confirm.resolve();
-        } else {
-          this._dataService.showErrorToast(res.message);
-          event.confirm.reject();
-        }
-      });
+  saveEditedCoupon(editNode: any): void {
+    if (this.isBusy) return;
+    this.isBusy = true;
+    if (editNode.activeStatus) editNode.code = "";
+    this._dataService.postAPI("/api/editCoupon", editNode).subscribe((res) => {
+      if (res.data) {
+        this._dataService.showSuccessToast(res.message);
+        this.isBusy = false;
+        this.backupArr[this.editKey] = res.data;
+        this.source.refresh();
+        this.editObject = {};
+      } else {
+        this.windowRef.close();
+        this._dataService.showErrorToast(res.message);
+        this.isBusy = false;
+      }
+    });
   }
   onDeleteConfirm(event): void {
     this._dataService
@@ -171,9 +185,13 @@ export class AllCouponsComponent {
         }
       });
   }
-  openEditForm(contentTemplate: any) {
-    this.windowService.open(contentTemplate, {
-      title: "Edit Form",
+  openEditForm(event: any, editModal: TemplateRef<any>) {
+    this.editObject = null;
+    event.data.expDate = event.data.expDate.substr(0, 10);
+    this.editObject = { ...event.data };
+    this.editKey = event.index;
+    this.windowRef = this.windowService.open(editModal, {
+      title: `Edit Coupon Form`,
     });
   }
   openDeletePrompt(event: any) {

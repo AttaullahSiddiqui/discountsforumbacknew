@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { NbDialogRef } from '@nebular/theme';
+import { Component } from "@angular/core";
+import { NbDialogRef } from "@nebular/theme";
+import { NbWindowRef } from "@nebular/theme";
 
 @Component({
   selector: "ngx-delete-prompt",
