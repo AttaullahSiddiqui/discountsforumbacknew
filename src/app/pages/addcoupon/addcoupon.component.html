@@ -39,6 +39,28 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="assignedStore" class="label col-sm-3 col-form-label"
+              >Choose Store</label
+            >
+            <div class="col-sm-9">
+              <ng-select
+                name="assignedStore"
+                [closeOnSelect]="true"
+                [searchable]="true"
+                [hideSelected]="true"
+                [(ngModel)]="couponInfo.storeId"
+                (change)="fetchTrackingLink(couponInfo.storeId)"
+              >
+                <ng-option
+                  [value]="item.value._id"
+                  *ngFor="let item of stores | keyvalue | sortStores"
+                >
+                  {{ item.value.name }}
+                </ng-option>
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="expDate" class="label col-sm-3 col-form-label"
               >Expiry Date</label
             >
@@ -74,10 +96,10 @@
               >Select Mode</label
             >
             <div class="col-sm-9" name="activeStatus">
-            <nb-radio-group [(value)]="couponInfo.activeStatus">
-              <nb-radio [value]="false">Code</nb-radio>
-              <nb-radio [value]="true">Active</nb-radio>
-            </nb-radio-group>
+              <nb-radio-group [(value)]="couponInfo.activeStatus">
+                <nb-radio [value]="false">Code</nb-radio>
+                <nb-radio [value]="true">Active</nb-radio>
+              </nb-radio-group>
             </div>
           </div>
           <!-- <div class="form-group row">

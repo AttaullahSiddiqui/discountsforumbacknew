@@ -27,11 +27,10 @@ import {
   PluralPipe,
   RoundPipe,
   TimingPipe,
+  SortStoresPipe,
   NumberWithCommasPipe,
 } from "./pipes";
-import {
-  OneColumnLayoutComponent,
-} from "./layouts";
+import { OneColumnLayoutComponent } from "./layouts";
 import { CORPORATE_THEME } from "./styles/theme.corporate";
 
 const NB_MODULES = [
@@ -62,6 +61,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
+  SortStoresPipe,
   NumberWithCommasPipe,
 ];
 

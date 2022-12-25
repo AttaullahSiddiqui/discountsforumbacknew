@@ -1,0 +1,48 @@
+<div class="row" *ngIf="storeArray">
+  <div class="col-md-6">
+    <nb-card>
+      <nb-card-header>Please select Store</nb-card-header>
+      <nb-card-body>
+        <ng-select
+          appendTo="body"
+          class="forStore"
+          name="selectedStore"
+          [closeOnSelect]="true"
+          [searchable]="true"
+          [hideSelected]="true"
+          [(ngModel)]="selectedStore"
+          (change)="loadCoupons(selectedStore)"
+        >
+          <ng-option
+            [value]="data.value._id"
+            *ngFor="let data of storeArray | keyvalue | sortStores"
+          >
+            {{ data.value.name }}
+          </ng-option>
+        </ng-select>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<nb-card *ngIf="dataLoaded">
+  <nb-card-header>
+    Total Coupons on Website &nbsp;&nbsp;
+    <button nbButton status="primary" size="medium">
+      {{ couponCount }}
+    </button></nb-card-header
+  >
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (edit)="openEditForm(contentTemplate)"
+      (delete)="openDeletePrompt($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #contentTemplate let-data>
+  <p>Here is the text provided via configgggggggggggggg</p>
+</ng-template>

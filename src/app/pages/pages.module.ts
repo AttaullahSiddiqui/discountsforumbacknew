@@ -12,6 +12,8 @@ import { AllSettingsModule } from "./allSettings/all-settings.module";
 import { AddCategoryModule } from "./addcategory/addcategory.module";
 import { AllCategoriesModule } from "./allcategories/allcategories.module";
 import { AddCouponModule } from "./addcoupon/addcoupon.module";
+import { AllCouponsModule } from "./allcoupons/allcoupons.module";
+import { DeletePromptModule } from "./allcoupons/delete-prompt/delete-prompt.module";
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { AddCouponModule } from "./addcoupon/addcoupon.module";
     AddCategoryModule,
     AllCategoriesModule,
     AddCouponModule,
+    AllCouponsModule,
+    DeletePromptModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],

@@ -27,8 +27,6 @@ export class AddCouponComponent implements OnDestroy {
   }
 
   addCoupon(couponData) {
-    console.log(couponData);
-    return;
     var dateBackup = couponData.expDate;
     if (this.isBusy) return;
     this.isBusy = true;

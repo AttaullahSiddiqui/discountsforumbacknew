@@ -7,14 +7,14 @@ import {
   NbMenuModule,
   NbLayoutModule,
   NbInputModule,
-  NbSpinnerModule,
   NbCheckboxModule,
   NbRadioModule,
   NbDatepickerModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
-import { AddCouponComponent } from "./addcoupon.component";
+import { AllCouponsComponent } from "./allcoupons.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Ng2SmartTableModule } from "ng2-smart-table";
 
 @NgModule({
   imports: [
@@ -29,11 +29,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     ThemeModule,
     NbMenuModule,
     NbActionsModule,
-    NbSpinnerModule,
+    Ng2SmartTableModule,
     NbCheckboxModule,
     NbRadioModule,
     NbDatepickerModule,
   ],
-  declarations: [AddCouponComponent],
+  declarations: [AllCouponsComponent],
 })
-export class AddCouponModule {}
+export class AllCouponsModule {}
