@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
 import { DataService } from "../../@core/utils/data.service";
 import * as customBuild from "../ckEditorCustomBuild/build/ckeditor.js";
+import { ImageCroppedEvent, base64ToFile } from "ngx-image-cropper";
 
 @Component({
   selector: "ngx-addstore",
@@ -187,22 +188,22 @@ export class AddStoreComponent implements OnDestroy {
     this.imageChangedEvent2 = event;
   }
 
-  // imageCropped(event: ImageCroppedEvent) {
-  //   this.selectedImage = event.file;
-  //   var reader = new FileReader();
-  //   reader.readAsDataURL(event.file);
-  //   reader.onloadend = () => {
-  //     this.croppedImage = reader.result;
-  //   };
-  // }
-  // imageCropped2(event: ImageCroppedEvent) {
-  //   this.selectedImage2 = event.file;
-  //   var reader = new FileReader();
-  //   reader.readAsDataURL(event.file);
-  //   reader.onloadend = () => {
-  //     this.croppedImage2 = reader.result;
-  //   };
-  // }
+  imageCropped(event: ImageCroppedEvent) {
+    this.selectedImage = base64ToFile(event.base64);
+    var reader = new FileReader();
+    reader.readAsDataURL(this.selectedImage);
+    reader.onloadend = () => {
+      this.croppedImage = reader.result;
+    };
+  }
+  imageCropped2(event: ImageCroppedEvent) {
+    this.selectedImage2 = base64ToFile(event.base64);
+    var reader = new FileReader();
+    reader.readAsDataURL(this.selectedImage);
+    reader.onloadend = () => {
+      this.croppedImage2 = reader.result;
+    };
+  }
 
   ngOnDestroy() {
     this.alive = false;

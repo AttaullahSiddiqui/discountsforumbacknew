@@ -29,6 +29,12 @@ div.validation-checkboxes {
     margin: 0 0.5rem;
   }
 }
-nb-select.size-medium:not(.full-width){
+nb-select.size-medium:not(.full-width) {
   width: 60%;
+}
+[nbInput].size-medium:not(.input-full-width){
+  width: 50%;
+}
+.marginAuto {
+  margin: 0 auto;
 }
