@@ -49,11 +49,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: "Add Store",
-        link: "/pages/layout/stepper",
+        link: "/pages/addstore",
       },
       {
         title: "Edit Store",
-        link: "/pages/layout/list",
+        link: "/pages/editstore",
       },
       {
         title: "Sort Top Stores",
