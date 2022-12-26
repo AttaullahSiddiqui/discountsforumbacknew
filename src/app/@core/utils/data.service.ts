@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { finalize } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
-import { Observable, Subject } from "rxjs";
-import { delay, shareReplay, debounceTime } from "rxjs/operators";
+import { AngularFireStorage } from "@angular/fire/storage";
 import {
   NbComponentStatus,
   NbGlobalLogicalPosition,
@@ -18,7 +17,8 @@ export class DataService {
   config: NbToastrConfig;
   constructor(
     private _http: HttpClient,
-    private toastrService: NbToastrService
+    private toastrService: NbToastrService,
+    private storage: AngularFireStorage
   ) {}
   fetchAPI(url) {
     return this._http
@@ -61,22 +61,22 @@ export class DataService {
       .pipe(map((res) => JSON.parse(JSON.stringify(res))));
   }
   storeImage(filePath, selectedImage, cb) {
-    // const fileRef = this.storage.ref(filePath);
-    // return this.storage
-    //   .upload(filePath, selectedImage)
-    //   .snapshotChanges()
-    //   .pipe(
-    //     finalize(() => {
-    //       fileRef.getDownloadURL().subscribe(
-    //         (url) => {
-    //           cb(undefined, url);
-    //         },
-    //         (err) => {
-    //           cb(err);
-    //         }
-    //       );
-    //     })
-    //   );
+    const fileRef = this.storage.ref(filePath);
+    return this.storage
+      .upload(filePath, selectedImage)
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(
+            (url) => {
+              cb(undefined, url);
+            },
+            (err) => {
+              cb(err);
+            }
+          );
+        })
+      );
   }
   deleteMedia(downloadURL) {
     // if (!downloadURL) return;

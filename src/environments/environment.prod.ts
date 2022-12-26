@@ -5,4 +5,13 @@
  */
 export const environment = {
   production: true,
+  firebaseConfig: {
+    apiKey: "AIzaSyDHCxgoT5VnGXiCcmMpSnkrOLMcPoYBwsw",
+    authDomain: "buymedeal-aacd9.firebaseapp.com",
+    databaseURL: "https://buymedeal-aacd9.firebaseio.com",
+    projectId: "buymedeal-aacd9",
+    storageBucket: "buymedeal-aacd9.appspot.com",
+    messagingSenderId: "805894285453",
+    appId: "1:805894285453:web:57c5df8686c757e929dac4",
+  },
 };

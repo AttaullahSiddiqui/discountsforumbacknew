@@ -129,35 +129,35 @@ export class AddStoreComponent implements OnDestroy {
     this.isBusy = true;
     var self = this;
     var filePath = `storeImages/_${new Date().getTime()}`;
-    // this._dataService
-    //   .storeImage(filePath, this.selectedImage, function (error, data) {
-    //     if (error) {
-    //       this._dataService.showErrorToast("Can't upload image to the Server");
-    //       return;
-    //     }
-    //     if (data) {
-    //       storeInfo.img = data;
-    //       if (self.croppedImage2) self.upoloadThumbImg(storeInfo);
-    //       else self.saveStoreToDB(storeInfo);
-    //     }
-    //   })
-    //   .subscribe();
+    this._dataService
+      .storeImage(filePath, this.selectedImage, function (error, data) {
+        if (error) {
+          this._dataService.showErrorToast("Can't upload image to the Server");
+          return;
+        }
+        if (data) {
+          storeInfo.img = data;
+          if (self.croppedImage2) self.upoloadThumbImg(storeInfo);
+          else self.saveStoreToDB(storeInfo);
+        }
+      })
+      .subscribe();
   }
   upoloadThumbImg(storeInfo) {
     var self = this;
     var filePath2 = `storeThumbImages/_${new Date().getTime()}`;
-    // this._dataService
-    //   .storeImage(filePath2, this.selectedImage2, function (error, data) {
-    //     if (error) {
-    //       this._dataService.showErrorToast("Can't upload image to the Server");
-    //       return;
-    //     }
-    //     if (data) {
-    //       storeInfo.thumbImg = data;
-    //       self.saveStoreToDB(storeInfo);
-    //     }
-    //   })
-    //   .subscribe();
+    this._dataService
+      .storeImage(filePath2, this.selectedImage2, function (error, data) {
+        if (error) {
+          this._dataService.showErrorToast("Can't upload image to the Server");
+          return;
+        }
+        if (data) {
+          storeInfo.thumbImg = data;
+          self.saveStoreToDB(storeInfo);
+        }
+      })
+      .subscribe();
   }
 
   saveStoreToDB(storeNode) {

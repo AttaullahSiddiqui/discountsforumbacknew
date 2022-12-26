@@ -2,7 +2,7 @@
   <div class="col-md-10">
     <nb-card>
       <nb-card-header>Create Store</nb-card-header>
-      <nb-card-body>
+      <nb-card-body class="pr-3 pr-5">
         <form
           #addStoreForm="ngForm"
           [hidden]="!categories"
@@ -142,6 +142,39 @@
               />
             </div>
           </div>
+          <div class="row">
+            <div class="offset-md-2 com-md-8 text-center">
+              <img [src]="croppedImage2" class="marginAuto" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="imge2" class="label col-sm-3 col-form-label"
+              >Thumbnail Image</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="file"
+                name="imge2"
+                (change)="fileChangeEvent2($event)"
+                [(ngModel)]="imgModel2"
+                class="custom-file-input"
+                accept="image/x-png,image/jpeg"
+                aria-describedby="inputGroupFileAddon01"
+              />
+              <label class="custom-file-label" for="inputGroupFile02"
+                >{{ htmlContent2 }}{{ imgModel2 }}</label
+              >
+            </div>
+          </div>
+          <image-cropper
+            [imageChangedEvent]="imageChangedEvent2"
+            [maintainAspectRatio]="false"
+            [aspectRatio]="2 / 1"
+            outputType="file"
+            format="png"
+            (imageCropped)="imageCropped2($event)"
+          >
+          </image-cropper>
           <div class="form-group row">
             <label for="directUrl" class="label col-sm-3 col-form-label"
               >Direct URL</label
@@ -169,6 +202,21 @@
                 required
                 name="trackUrl"
                 [(ngModel)]="storeInfo.trackUrl"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="metaTitle" class="label col-sm-3 col-form-label"
+              >Meta Title</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                nbInput
+                fullWidth
+                required
+                name="metaTitle"
+                [(ngModel)]="storeInfo.metaTitle"
               />
             </div>
           </div>
@@ -202,38 +250,6 @@
               />
             </div>
           </div>
-
-          <div class="form-group row">
-            <label for="expDate" class="label col-sm-3 col-form-label"
-              >Expiry Date</label
-            >
-            <div class="col-sm-9">
-              <input
-                nbInput
-                name="expDate"
-                placeholder="Click to select Date"
-                [(ngModel)]="storeInfo.expDate"
-                required
-                [nbDatepicker]="formpicker"
-              />
-              <nb-datepicker #formpicker></nb-datepicker>
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="trackingLink" class="label col-sm-3 col-form-label"
-              >Tracking Link</label
-            >
-            <div class="col-sm-9">
-              <input
-                type="text"
-                nbInput
-                fullWidth
-                [(ngModel)]="storeInfo.trackingLink"
-                required
-                name="trackingLink"
-              />
-            </div>
-          </div>
           <hr />
           <div class="form-group row">
             <label for="fb" class="label col-sm-3 col-form-label"
@@ -244,7 +260,6 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="fb"
                 [(ngModel)]="storeInfo.fb"
               />
@@ -259,7 +274,6 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="pin"
                 [(ngModel)]="storeInfo.pin"
               />
@@ -274,7 +288,6 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="wik"
                 [(ngModel)]="storeInfo.wik"
               />
@@ -289,7 +302,6 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="twit"
                 [(ngModel)]="storeInfo.twit"
               />
@@ -304,7 +316,6 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="gplus"
                 [(ngModel)]="storeInfo.gplus"
               />
@@ -319,7 +330,6 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="android"
                 [(ngModel)]="storeInfo.android"
               />
@@ -334,13 +344,12 @@
                 type="text"
                 nbInput
                 fullWidth
-                required
                 name="ios"
                 [(ngModel)]="storeInfo.ios"
               />
             </div>
           </div>
-          <br>
+          <br />
           <div class="validation-checkboxes row justify-content-md-around">
             <nb-checkbox
               status="success"

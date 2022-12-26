@@ -21,6 +21,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from "@nebular/theme";
+import { environment } from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +31,7 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
