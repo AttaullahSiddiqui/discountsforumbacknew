@@ -79,7 +79,7 @@ export class AllCouponsComponent {
   constructor(
     private _dataService: DataService,
     private windowService: NbWindowService,
-    private dialogService: NbDialogService // @Optional() public windowRef: NbWindowRef
+    private dialogService: NbDialogService
   ) {}
 
   ngOnInit() {

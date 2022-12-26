@@ -14,12 +14,15 @@ import { AllCategoriesModule } from "./allcategories/allcategories.module";
 import { AddCouponModule } from "./addcoupon/addcoupon.module";
 import { AllCouponsModule } from "./allcoupons/allcoupons.module";
 import { DeletePromptModule } from "./allcoupons/delete-prompt/delete-prompt.module";
+import { SortCouponsModule } from "./sortcoupons/sort-coupons.module";
+import { SortablejsModule } from "ngx-sortablejs";
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
+    SortablejsModule.forRoot({ animation: 200 }),
     DashboardModule,
     AddUserModule,
     AllUserModule,
@@ -29,6 +32,7 @@ import { DeletePromptModule } from "./allcoupons/delete-prompt/delete-prompt.mod
     AddCouponModule,
     AllCouponsModule,
     DeletePromptModule,
+    SortCouponsModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],

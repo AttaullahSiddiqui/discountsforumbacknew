@@ -29,6 +29,7 @@ import {
   TimingPipe,
   SortStoresPipe,
   NumberWithCommasPipe,
+  OrderbyPipe,
 } from "./pipes";
 import { OneColumnLayoutComponent } from "./layouts";
 import { CORPORATE_THEME } from "./styles/theme.corporate";
@@ -62,6 +63,7 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   SortStoresPipe,
+  OrderbyPipe,
   NumberWithCommasPipe,
 ];
 

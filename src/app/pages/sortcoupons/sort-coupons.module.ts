@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { SortablejsModule } from "ngx-sortablejs";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -7,23 +8,20 @@ import {
   NbMenuModule,
   NbLayoutModule,
   NbInputModule,
+  NbSpinnerModule,
   NbCheckboxModule,
   NbRadioModule,
   NbDatepickerModule,
-  NbSpinnerModule,
-  NbDialogModule,
-  NbWindowModule,
+  NbTreeGridModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
-import { AllCouponsComponent } from "./allcoupons.component";
+import { SortCouponsComponent } from "./sort-coupons.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Ng2SmartTableModule } from "ng2-smart-table";
 
 @NgModule({
   imports: [
     NgSelectModule,
-    NbDialogModule.forChild(),
-    NbWindowModule.forChild(),
+    SortablejsModule,
     FormsModule,
     ReactiveFormsModule,
     NbLayoutModule,
@@ -34,12 +32,12 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
     ThemeModule,
     NbMenuModule,
     NbActionsModule,
-    Ng2SmartTableModule,
-    NbCheckboxModule,
     NbSpinnerModule,
+    NbCheckboxModule,
     NbRadioModule,
     NbDatepickerModule,
+    NbTreeGridModule,
   ],
-  declarations: [AllCouponsComponent],
+  declarations: [SortCouponsComponent],
 })
-export class AllCouponsModule {}
+export class SortCouponsModule {}
