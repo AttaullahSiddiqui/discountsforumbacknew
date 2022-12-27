@@ -15,6 +15,8 @@ import { AllCouponsComponent } from "./allcoupons/allcoupons.component";
 import { SortCouponsComponent } from "./sortcoupons/sort-coupons.component";
 import { AddStoreComponent } from "./addstore/addstore.component";
 import { EditStoreComponent } from "./editstore/editstore.component";
+import { AddBlogComponent } from "./addblog/addblog.component";
+import { AllBlogsComponent } from "./allblogs/allblogs.component";
 
 const routes: Routes = [
   {
@@ -74,6 +76,16 @@ const routes: Routes = [
       {
         path: "editstore",
         component: EditStoreComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "addblog",
+        component: AddBlogComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "allblogs",
+        component: AllBlogsComponent,
         canActivate: [UtilityService],
       },
       {

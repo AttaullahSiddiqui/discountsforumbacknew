@@ -16,7 +16,7 @@ import {
   NbDatepickerModule,
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
-import { AddStoreComponent } from "./addstore.component";
+import { AddBlogComponent } from "./addblog.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
@@ -40,6 +40,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     CKEditorModule,
     ImageCropperModule,
   ],
-  declarations: [AddStoreComponent],
+  declarations: [AddBlogComponent],
 })
-export class AddStoreModule {}
+export class AddBlogModule {}

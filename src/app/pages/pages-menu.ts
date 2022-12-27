@@ -103,11 +103,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: "Add Blog",
-        link: "/pages/layout/stepper",
+        link: "/pages/addblog",
       },
       {
         title: "All Blogs",
-        link: "/pages/layout/list",
+        link: "/pages/allblogs",
       },
     ],
   },

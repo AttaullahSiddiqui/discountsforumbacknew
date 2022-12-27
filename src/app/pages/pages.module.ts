@@ -18,6 +18,8 @@ import { SortCouponsModule } from "./sortcoupons/sort-coupons.module";
 import { SortablejsModule } from "ngx-sortablejs";
 import { AddStoreModule } from "./addstore/addstore.module";
 import { EditStoreModule } from "./editstore/editstore.module";
+import { AddBlogModule } from "./addblog/addblog.module";
+import { AllBlogsModule } from "./allblogs/allblogs.module";
 
 @NgModule({
   imports: [
@@ -37,6 +39,8 @@ import { EditStoreModule } from "./editstore/editstore.module";
     SortCouponsModule,
     AddStoreModule,
     EditStoreModule,
+    AddBlogModule,
+    AllBlogsModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],
