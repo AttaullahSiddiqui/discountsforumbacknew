@@ -20,6 +20,7 @@ import { AddStoreModule } from "./addstore/addstore.module";
 import { EditStoreModule } from "./editstore/editstore.module";
 import { AddBlogModule } from "./addblog/addblog.module";
 import { AllBlogsModule } from "./allblogs/allblogs.module";
+import { EmailListModule } from "./emaillist/email-list.module";
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { AllBlogsModule } from "./allblogs/allblogs.module";
     EditStoreModule,
     AddBlogModule,
     AllBlogsModule,
+    EmailListModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],

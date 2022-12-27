@@ -17,6 +17,7 @@ import { AddStoreComponent } from "./addstore/addstore.component";
 import { EditStoreComponent } from "./editstore/editstore.component";
 import { AddBlogComponent } from "./addblog/addblog.component";
 import { AllBlogsComponent } from "./allblogs/allblogs.component";
+import { EmailListComponent } from "./emaillist/email-list.component";
 
 const routes: Routes = [
   {
@@ -86,6 +87,11 @@ const routes: Routes = [
       {
         path: "allblogs",
         component: AllBlogsComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "emaillist",
+        component: EmailListComponent,
         canActivate: [UtilityService],
       },
       {

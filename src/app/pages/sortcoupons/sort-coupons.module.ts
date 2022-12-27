@@ -7,12 +7,7 @@ import {
   NbCardModule,
   NbMenuModule,
   NbLayoutModule,
-  NbInputModule,
-  NbSpinnerModule,
-  NbCheckboxModule,
-  NbRadioModule,
-  NbDatepickerModule,
-  NbTreeGridModule,
+  NbInputModule
 } from "@nebular/theme";
 import { ThemeModule } from "../../@theme/theme.module";
 import { SortCouponsComponent } from "./sort-coupons.component";
@@ -31,12 +26,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     NbInputModule,
     ThemeModule,
     NbMenuModule,
-    NbActionsModule,
-    NbSpinnerModule,
-    NbCheckboxModule,
-    NbRadioModule,
-    NbDatepickerModule,
-    NbTreeGridModule,
+    NbActionsModule
   ],
   declarations: [SortCouponsComponent],
 })

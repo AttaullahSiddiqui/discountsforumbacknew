@@ -14,9 +14,7 @@ export class SortCouponsComponent implements OnDestroy {
   coupons = null;
   reArranging: Boolean = false;
 
-  constructor(
-    private _dataService: DataService
-  ) {}
+  constructor(private _dataService: DataService) {}
 
   ngOnInit() {
     this._dataService.fetchAPI("/api/fetchStoresOnlyId").subscribe((res) => {

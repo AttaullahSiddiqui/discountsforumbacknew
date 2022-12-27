@@ -119,6 +119,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: "Emails",
     icon: "email-outline",
-    link: "/pages/iot-dashboard",
+    link: "/pages/emaillist",
   },
 ];

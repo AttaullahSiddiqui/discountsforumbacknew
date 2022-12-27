@@ -53,7 +53,8 @@ export class AllCouponsComponent {
         valuePrepareFunction: (value, row, cell) => {
           return cell.row.index + 1;
         },
-        editable: false,
+        width: "15%",
+        filter: false,
       },
       offerBox: {
         title: "Offer Text",
@@ -62,11 +63,13 @@ export class AllCouponsComponent {
       expDate: {
         title: "Expiry Date",
         type: "string",
+        filter: false,
       },
       activeStatus: {
         title: "Feature",
         type: "custom",
         renderComponent: CustomRenderComponent,
+        filter: false,
       },
     },
     actions: {
