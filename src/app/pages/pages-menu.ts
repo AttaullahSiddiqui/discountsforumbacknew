@@ -57,7 +57,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         title: "Sort Top Stores",
-        link: "/pages/layout/list",
+        link: "/pages/sorttopstores",
       },
     ],
   },

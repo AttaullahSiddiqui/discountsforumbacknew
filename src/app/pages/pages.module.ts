@@ -17,6 +17,7 @@ import { DeletePromptModule } from "./allcoupons/delete-prompt/delete-prompt.mod
 import { SortCouponsModule } from "./sortcoupons/sort-coupons.module";
 import { SortablejsModule } from "ngx-sortablejs";
 import { AddStoreModule } from "./addstore/addstore.module";
+import { EditStoreModule } from "./editstore/editstore.module";
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AddStoreModule } from "./addstore/addstore.module";
     DeletePromptModule,
     SortCouponsModule,
     AddStoreModule,
+    EditStoreModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],

@@ -14,6 +14,7 @@ import { AddCouponComponent } from "./addcoupon/addcoupon.component";
 import { AllCouponsComponent } from "./allcoupons/allcoupons.component";
 import { SortCouponsComponent } from "./sortcoupons/sort-coupons.component";
 import { AddStoreComponent } from "./addstore/addstore.component";
+import { EditStoreComponent } from "./editstore/editstore.component";
 
 const routes: Routes = [
   {
@@ -68,6 +69,11 @@ const routes: Routes = [
       {
         path: "addstore",
         component: AddStoreComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "editstore",
+        component: EditStoreComponent,
         canActivate: [UtilityService],
       },
       {
