@@ -72,78 +72,14 @@ export const CORPORATE_THEME = {
       areaHoverColor: baseThemeVariables.fgHighlight,
       areaBorderColor: baseThemeVariables.border5,
     },
-
-    profitBarAnimationEchart: {
-      textColor: baseThemeVariables.fgText,
-
-      firstAnimationBarColor: baseThemeVariables.primary,
-      secondAnimationBarColor: baseThemeVariables.success,
-
-      splitLineStyleOpacity: '1',
-      splitLineStyleWidth: '1',
-      splitLineStyleColor: baseThemeVariables.separator,
-
-      tooltipTextColor: baseThemeVariables.fgText,
-      tooltipFontWeight: 'normal',
-      tooltipFontSize: '16',
-      tooltipBg: baseThemeVariables.bg,
-      tooltipBorderColor: baseThemeVariables.border2,
-      tooltipBorderWidth: '1',
-      tooltipExtraCss: 'border-radius: 10px; padding: 4px 16px;',
-    },
-
-    trafficBarEchart: {
-      gradientFrom: baseThemeVariables.warningLight,
-      gradientTo: baseThemeVariables.warning,
-      shadow: baseThemeVariables.warningLight,
-      shadowBlur: '0',
-
-      axisTextColor: baseThemeVariables.fgText,
-      axisFontSize: '12',
-
-      tooltipBg: baseThemeVariables.bg,
-      tooltipBorderColor: baseThemeVariables.border2,
-      tooltipExtraCss: 'border-radius: 10px; padding: 8px 24px;',
-      tooltipTextColor: baseThemeVariables.fgText,
-      tooltipFontWeight: 'normal',
-    },
-
     countryOrders: {
       countryBorderColor: baseThemeVariables.border4,
       countryFillColor: baseThemeVariables.bg4,
       countryBorderWidth: '1',
       hoveredCountryBorderColor: baseThemeVariables.primary,
       hoveredCountryFillColor: baseThemeVariables.primaryLight,
-      hoveredCountryBorderWidth: '1',
-
-      chartAxisLineColor: baseThemeVariables.border4,
-      chartAxisTextColor: baseThemeVariables.fg,
-      chartAxisFontSize: '16',
-      chartGradientTo: baseThemeVariables.primary,
-      chartGradientFrom: baseThemeVariables.primaryLight,
-      chartAxisSplitLine: baseThemeVariables.separator,
-      chartShadowLineColor: baseThemeVariables.primaryLight,
-
-      chartLineBottomShadowColor: baseThemeVariables.primary,
-
-      chartInnerLineColor: baseThemeVariables.bg2,
+      hoveredCountryBorderWidth: '1'
     },
-
-    echarts: {
-      bg: baseThemeVariables.bg,
-      textColor: baseThemeVariables.fgText,
-      axisLineColor: baseThemeVariables.fgText,
-      splitLineColor: baseThemeVariables.separator,
-      itemHoverShadowColor: 'rgba(0, 0, 0, 0.5)',
-      tooltipBackgroundColor: baseThemeVariables.primary,
-      areaOpacity: '0.7',
-    },
-
-    chartjs: {
-      axisLineColor: baseThemeVariables.separator,
-      textColor: baseThemeVariables.fgText,
-    },
-
     orders: {
       tooltipBg: baseThemeVariables.bg,
       tooltipLineColor: 'rgba(0, 0, 0, 0)',
