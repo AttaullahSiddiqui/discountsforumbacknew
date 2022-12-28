@@ -23,17 +23,17 @@ export class AuthComponent {
       this._dataService
         .postAPI("/api/verifyUserToken", { token: checkAuth })
         .subscribe((res) => {
-          // if (res.data) this.router.navigateByUrl("/pages/dashboard");
+          if (res.data) this.router.navigateByUrl("pages/dashboard");
         });
     }
   }
 
-  authUser(userInfo) {
+  authUser(userInfo: any) {
     this._dataService.postAPI("/api/login", userInfo).subscribe((res) => {
       if (res.data) {
         this._utlityService.setToken(res.data);
-        this.router.navigateByUrl("/pages/dashboard");
         this._dataService.showSuccessToast("Logged In");
+        this.router.navigateByUrl("pages/dashboard");
       } else {
         this._dataService.showErrorToast(res["message"]);
       }

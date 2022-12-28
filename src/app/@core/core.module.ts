@@ -14,12 +14,14 @@ import { NbSecurityModule, NbRoleProvider } from "@nebular/security";
 import { of as observableOf } from "rxjs";
 
 import { throwIfAlreadyLoaded } from "./module-import-guard";
-import {
-  LayoutService,
-  StateService,
-} from "./utils";
+import { LayoutService, StateService } from "./utils";
 import { DataService } from "./utils/data.service";
 import { UtilityService } from "./utils/utility.service";
+import { MockDataModule } from "./mock/mock-data.module";
+import { UserData } from "./data/users";
+import { TemperatureHumidityData } from "./data/temperature-humidity";
+import { UserService } from "./mock/users.service";
+import { TemperatureHumidityService } from "./mock/temperature-humidity.service";
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
@@ -28,7 +30,15 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
   }
 }
 
+const DATA_SERVICES = [
+  { provide: UserData, useClass: UserService },
+  { provide: TemperatureHumidityData, useClass: TemperatureHumidityService },
+];
+
 export const NB_CORE_PROVIDERS = [
+  ...MockDataModule.forRoot().providers,
+  ,
+  ...DATA_SERVICES,
   DataService,
   UtilityService,
   ...NbAuthModule.forRoot({}).providers,
