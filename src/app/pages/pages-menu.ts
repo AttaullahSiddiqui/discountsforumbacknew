@@ -114,7 +114,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: "Slider",
     icon: "toggle-right-outline",
-    link: "/pages/iot-dashboard",
+    link: "/pages/slider",
   },
   {
     title: "Emails",
