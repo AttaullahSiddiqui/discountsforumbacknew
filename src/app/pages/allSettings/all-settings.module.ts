@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { NgSelectModule } from "@ng-select/ng-select";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
+    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     NbLayoutModule,

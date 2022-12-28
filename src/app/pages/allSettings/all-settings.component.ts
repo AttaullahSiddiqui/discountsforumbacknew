@@ -10,7 +10,7 @@ import { UtilityService } from "../../@core/utils/utility.service";
 export class AllSettingsComponent implements OnDestroy {
   private alive = true;
   dummyArr: [] = null;
-  isBusy: Boolean = true;
+  isBusy: Boolean = false;
   mainObject = {
     tags: "",
     eventName: "",
