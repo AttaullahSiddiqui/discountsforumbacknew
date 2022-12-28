@@ -11,8 +11,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && node server",
-    "build": "SET NODE_OPTIONS=--openssl-legacy-provider && ng build  --prod --build-optimizer",
+    "start": "node server",
+    "build": "ng build  --prod --build-optimizer",
     "test": "ng test",
     "postinstall": ""
   },
