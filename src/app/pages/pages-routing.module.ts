@@ -102,7 +102,7 @@ const routes: Routes = [
       },
       {
         path: "",
-        redirectTo: "/pages/dashboard",
+        redirectTo: "/auth",
         pathMatch: "full",
       },
       {
