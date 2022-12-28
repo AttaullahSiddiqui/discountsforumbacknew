@@ -14,7 +14,7 @@
     "start": "node server",
     "build": "ng build  --prod --build-optimizer",
     "test": "ng test",
-    "postinstall": "npm i -f"
+    "postinstall": ""
   },
   "dependencies": {
     "@angular/animations": "^12.2.16",
