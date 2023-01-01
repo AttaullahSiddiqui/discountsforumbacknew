@@ -5,11 +5,11 @@ import {
   NbSidebarService,
   NbThemeService,
 } from "@nebular/theme";
-
-import { UserData } from "../../../@core/data/users";
+import { UtilityService } from "../../../@core/utils/utility.service";
 import { LayoutService } from "../../../@core/utils";
-import { map, takeUntil } from "rxjs/operators";
+import { filter, map, takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "ngx-header",
@@ -19,24 +19,26 @@ import { Subject } from "rxjs";
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user: any;
+  user = {
+    name: "-",
+    picture: "assets/img/user.png",
+  };
 
   userMenu = [{ title: "Log out" }];
 
   constructor(
     private sidebarService: NbSidebarService,
-    private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
+    private _utilityService: UtilityService,
     private layoutService: LayoutService,
-    private breakpointService: NbMediaBreakpointsService
+    private menuService: NbMenuService,
+    private breakpointService: NbMediaBreakpointsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.userService
-      .getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => (this.user = "users.nick"));
+    var authorName = this._utilityService.getAuthor() || "User";
+    this.user.name = authorName.charAt(0).toUpperCase() + authorName.slice(1);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService
@@ -55,6 +57,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     //     takeUntil(this.destroy$),
     //   )
     //   .subscribe(themeName => this.currentTheme = themeName);
+    this.menuService.onItemClick().subscribe((event) => {
+      this.onContecxtItemSelection(event);
+    });
   }
 
   ngOnDestroy() {
@@ -74,7 +79,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   navigateHome() {
-    this.menuService.navigateHome();
+    this.router.navigateByUrl("pages/dashboard");
     return false;
+  }
+
+  onContecxtItemSelection(event) {
+    // console.log("click", event);
+    if (event.item.title == "Log out") {
+      this._utilityService.removeToken();
+      this.router.navigateByUrl("/auth");
+    }
   }
 }

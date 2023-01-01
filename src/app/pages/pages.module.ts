@@ -22,6 +22,8 @@ import { AddBlogModule } from "./addblog/addblog.module";
 import { AllBlogsModule } from "./allblogs/allblogs.module";
 import { EmailListModule } from "./emaillist/email-list.module";
 import { SliderModule } from "./slider/slider.module";
+import { AddBannerModule } from "./addbanner/addbanner.module";
+import { AddPostImageModule } from "./addpostimage/addpostimage.module";
 
 @NgModule({
   imports: [
@@ -41,6 +43,8 @@ import { SliderModule } from "./slider/slider.module";
     SortCouponsModule,
     AddStoreModule,
     EditStoreModule,
+    AddBannerModule,
+    AddPostImageModule,
     AddBlogModule,
     AllBlogsModule,
     SliderModule,

@@ -6,9 +6,7 @@ import {
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import {
-  NbAuthJWTToken,
-  NbAuthModule,
-  NbDummyAuthStrategy,
+  NbAuthModule
 } from "@nebular/auth";
 import { NbSecurityModule, NbRoleProvider } from "@nebular/security";
 import { of as observableOf } from "rxjs";
@@ -18,9 +16,7 @@ import { LayoutService, StateService } from "./utils";
 import { DataService } from "./utils/data.service";
 import { UtilityService } from "./utils/utility.service";
 import { MockDataModule } from "./mock/mock-data.module";
-import { UserData } from "./data/users";
 import { TemperatureHumidityData } from "./data/temperature-humidity";
-import { UserService } from "./mock/users.service";
 import { TemperatureHumidityService } from "./mock/temperature-humidity.service";
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -31,7 +27,6 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 const DATA_SERVICES = [
-  { provide: UserData, useClass: UserService },
   { provide: TemperatureHumidityData, useClass: TemperatureHumidityService },
 ];
 

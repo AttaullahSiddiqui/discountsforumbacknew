@@ -19,6 +19,8 @@ import { AddBlogComponent } from "./addblog/addblog.component";
 import { AllBlogsComponent } from "./allblogs/allblogs.component";
 import { EmailListComponent } from "./emaillist/email-list.component";
 import { SliderComponent } from "./slider/slider.component";
+import { AddBannerComponent } from "./addbanner/addbanner.component";
+import { AddPostImageComponent } from "./addpostimage/addpostimage.component";
 
 const routes: Routes = [
   {
@@ -98,6 +100,16 @@ const routes: Routes = [
       {
         path: "emaillist",
         component: EmailListComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "addbanner",
+        component: AddBannerComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "addpostimage",
+        component: AddPostImageComponent,
         canActivate: [UtilityService],
       },
       {

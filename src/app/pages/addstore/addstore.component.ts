@@ -100,7 +100,7 @@ export class AddStoreComponent implements OnDestroy {
     placeholder: "Type the content here!",
   };
   showList: boolean;
-  storeInfo: any = {};
+  storeInfo: any = { shortDes: "", longDes: "" };
   categories: any;
   isBusy = false;
   selectedImage: any = null;

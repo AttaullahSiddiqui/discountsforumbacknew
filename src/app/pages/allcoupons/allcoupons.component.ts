@@ -12,7 +12,7 @@ import { DeletePromptComponent } from "./delete-prompt/delete-prompt.component";
 })
 export class AllCouponsComponent {
   @ViewChild("couponEditModal", { static: true })
-  contentTemplate: TemplateRef<any>;
+  couponEditModal: TemplateRef<any>;
   storeArray: {} = null;
   selectedStoreName = "";
   selectedStore = "";
