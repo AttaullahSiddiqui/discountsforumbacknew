@@ -17,6 +17,7 @@ module.exports = {
   fetchCategories: fetchCategories,
   fetchStoresOnlyId: fetchStoresOnlyId,
   fetchBlogsOnlyId: fetchBlogsOnlyId,
+  fetchTopStores: fetchTopStores,
   fetchStoreById: fetchStoreById,
   fetchStoreByIdDuplicate: fetchStoreByIdDuplicate,
   fetchStoresWithLimit: fetchStoresWithLimit,
@@ -51,6 +52,23 @@ function fetchCategories(req, res) {
           );
         else
           res.json(resHandler.respondError("Unable to fetch categories", -3));
+      }
+    });
+}
+function fetchTopStores(req, res) {
+  Store.find({ editorChoice: true }, "storeURL name sortNo")
+    .limit(Number(req.query.limitNo))
+    .exec(function (err, stores) {
+      if (err) res.json(resHandler.respondError(err[0], err[1] || -1));
+      else {
+        if (stores.length)
+          res.json(
+            resHandler.respondSuccess(stores, "Stores fetched successfully", 2)
+          );
+        else
+          res.json(
+            resHandler.respondError("Unable to fetch Stores at the moment", -3)
+          );
       }
     });
 }

@@ -29,6 +29,7 @@ router.post("/addBlogItem", apiCtrl.addBlogItem);
 router.post("/addProductForBlog", apiCtrl.addProductForBlog);
 
 router.get("/fetchUsers", fetchCtrl.fetchUsers);
+router.get("/fetchTopStores", fetchCtrl.fetchTopStores);
 router.get("/fetchCategories", fetchCtrl.fetchCategories);
 router.get("/fetchBlogs", fetchCtrl.fetchBlogs);
 router.get("/fetchStoresOnlyId", fetchCtrl.fetchStoresOnlyId);
@@ -73,5 +74,7 @@ router.post("/deleteProductForBlog", dltCtrl.deleteProductForBlog);
 
 router.post("/sortCoupons", sortCtrl.sortCoupons);
 router.post("/reArrangeCoupons", sortCtrl.reArrangeCoupons);
+router.post("/sortStores", sortCtrl.sortStores);
+router.post("/reArrangeStores", sortCtrl.reArrangeStores);
 
 module.exports = router;

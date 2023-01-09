@@ -138,6 +138,31 @@ function createCategory(req, res) {
 }
 
 function addStore(req, res) {
+  if (req.body.sortNo && req.body.editorChoice) {
+    Store.find({ editorChoice: true })
+      .sort({ sortNo: -1 })
+      .limit(1)
+      .then(
+        (store) => {
+          if (store[0]) {
+            req.body.sortNo = store[0].sortNo + 1;
+            addStoreCallBack(req, res);
+          } else {
+            req.body.sortNo = 1;
+            addStoreCallBack(req, res);
+          }
+        },
+        (err) => {
+          var error = errHandler.handle(err);
+          res.json(resHandler.respondError(error[0], error[1] || -1));
+        }
+      );
+  } else {
+    req.body.sortNo = 1;
+    addStoreCallBack(req, res);
+  }
+}
+function addStoreCallBack(req, res) {
   var newStore = new Store({
     name: req.body.name,
     storeURL: req.body.storeURL,
@@ -162,6 +187,7 @@ function addStore(req, res) {
     ios: req.body.ios,
     topStore: req.body.topStore,
     editorChoice: req.body.editorChoice,
+    sortNo: req.body.sortNo,
   });
   newStore.save().then(
     function (result) {
@@ -446,7 +472,7 @@ function addBlog(req, res) {
     storeId: req.body.storeId,
     relatedStores: req.body.relatedStores,
     showVertically: req.body.showVertically,
-    featuredForHome: req.body.featuredForHome
+    featuredForHome: req.body.featuredForHome,
   });
   newBlog.save().then(
     function (result) {

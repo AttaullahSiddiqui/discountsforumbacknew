@@ -24,6 +24,7 @@ import { EmailListModule } from "./emaillist/email-list.module";
 import { SliderModule } from "./slider/slider.module";
 import { AddBannerModule } from "./addbanner/addbanner.module";
 import { AddPostImageModule } from "./addpostimage/addpostimage.module";
+import { SortStoresModule } from "./sortstores/sort-stores.module";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { AddPostImageModule } from "./addpostimage/addpostimage.module";
     SortCouponsModule,
     AddStoreModule,
     EditStoreModule,
+    SortStoresModule,
     AddBannerModule,
     AddPostImageModule,
     AddBlogModule,

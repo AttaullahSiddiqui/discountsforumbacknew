@@ -21,6 +21,7 @@ import { EmailListComponent } from "./emaillist/email-list.component";
 import { SliderComponent } from "./slider/slider.component";
 import { AddBannerComponent } from "./addbanner/addbanner.component";
 import { AddPostImageComponent } from "./addpostimage/addpostimage.component";
+import { SortStoresComponent } from "./sortstores/sort-stores.component";
 
 const routes: Routes = [
   {
@@ -80,6 +81,11 @@ const routes: Routes = [
       {
         path: "editstore",
         component: EditStoreComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "sortstores",
+        component: SortStoresComponent,
         canActivate: [UtilityService],
       },
       {
