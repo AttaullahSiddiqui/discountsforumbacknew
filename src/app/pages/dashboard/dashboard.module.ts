@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule } from "@angular/core";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -9,13 +9,13 @@ import {
   NbSelectModule,
   NbListModule,
   NbIconModule,
-} from '@nebular/theme';
-import { ThemeModule } from '../../@theme/theme.module';
-import { DashboardComponent } from './dashboard.component';
-import { StatusCardComponent } from './status-card/status-card.component';
-import { TemperatureComponent } from './temperature/temperature.component';
-import { TemperatureDraggerComponent } from './temperature/temperature-dragger/temperature-dragger.component';
-import { FormsModule } from '@angular/forms';
+} from "@nebular/theme";
+import { ThemeModule } from "../../@theme/theme.module";
+import { DashboardComponent } from "./dashboard.component";
+import { StatusCardComponent } from "./status-card/status-card.component";
+import { TemperatureComponent } from "./temperature/temperature.component";
+import { TemperatureDraggerComponent } from "./temperature/temperature-dragger/temperature-dragger.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
     NbSelectModule,
     NbListModule,
     NbIconModule,
-    NbButtonModule
+    NbButtonModule,
   ],
   declarations: [
     DashboardComponent,
@@ -39,4 +39,4 @@ import { FormsModule } from '@angular/forms';
     TemperatureComponent,
   ],
 })
-export class DashboardModule { }
+export class DashboardModule {}
