@@ -835,6 +835,7 @@ export class AllBlogsComponent {
     });
   }
   openDeletePrompt(event: any) {
+    this.dltIndex = event.index;
     this.dialogService
       .open(DeletePromptComponent)
       .onClose.subscribe((dltVal) => {

@@ -522,22 +522,6 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="buttonTxt" class="label col-sm-3 col-form-label"
-        >Button Text</label
-      >
-      <div class="col-sm-9">
-        <input
-          type="text"
-          nbInput
-          fullWidth
-          name="buttonTxt"
-          required
-          placeholder="Add Text to be displayed on Button.."
-          [(ngModel)]="editObject.buttonTxt"
-        />
-      </div>
-    </div>
-    <div class="form-group row">
       <label for="metaTitle" class="label col-sm-3 col-form-label"
         >Meta Title</label
       >
@@ -579,6 +563,21 @@
           name="metaKeywords"
           required
           [(ngModel)]="editObject.metaKeywords"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="buttonTxt" class="label col-sm-3 col-form-label"
+        >Button Text</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          name="buttonTxt"
+          placeholder="Add Text to be displayed on Button.."
+          [(ngModel)]="editObject.buttonTxt"
         />
       </div>
     </div>

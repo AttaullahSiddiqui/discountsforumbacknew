@@ -1,5 +1,7 @@
 import { NgModule } from "@angular/core";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { ImageCropperModule } from "ngx-image-cropper";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -39,6 +41,8 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
     NbSpinnerModule,
     NbRadioModule,
     NbDatepickerModule,
+    CKEditorModule,
+    ImageCropperModule,
   ],
   declarations: [AllBlogsComponent],
 })
