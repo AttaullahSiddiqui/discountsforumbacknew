@@ -307,7 +307,7 @@ export class AllBlogsComponent {
   getBlogsFunc() {
     this.isLoading = true;
     this._dataService
-      .fetchAPIWithLimit("/api/fetchBlogs", this.skipNo, 8)
+      .fetchAPIWithLimit("/api/fetchBlogs", this.skipNo, 40)
       .subscribe((res) => {
         if (res.data) {
           this.blogArray = [];
