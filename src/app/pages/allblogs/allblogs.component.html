@@ -445,6 +445,101 @@
       </div>
     </div>
     <div class="form-group row">
+      <label for="longDesMiddle5" class="label col-sm-3 col-form-label"
+        >Middle Description 5</label
+      >
+      <div class="col-sm-9">
+        <ckeditor
+          [editor]="Editor"
+          [config]="ckConfig"
+          name="longDesMiddle5"
+          [(ngModel)]="editObject.longDesMiddle5"
+        ></ckeditor>
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-md-2 com-md-8 text-center">
+        <img
+          [src]="editObject.imgGrid5"
+          class="marginAuto"
+          style="max-width: 50%"
+        />
+      </div>
+    </div>
+    <div class="row" *ngIf="croppedImage5">
+      <div class="offset-md-2 com-md-8 text-center">
+        <img [src]="croppedImage5" class="marginAuto" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="imge" class="label col-sm-3 col-form-label"
+        >Image for Section 5</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="file"
+          name="imge"
+          (change)="fileChangeEvent($event, 5)"
+          [(ngModel)]="imgModel5"
+          class="custom-file-input"
+          accept="image/x-png,image/jpeg"
+        />
+        <label class="custom-file-label"
+          >{{ htmlContent }}{{ imgModel5 }}</label
+        >
+      </div>
+    </div>
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent5"
+      [maintainAspectRatio]="false"
+      [aspectRatio]="2 / 3"
+      outputType="file"
+      format="jpeg"
+      [imageQuality]="100"
+      (imageCropped)="imageCropped($event, 5)"
+    >
+    </image-cropper>
+    <div class="form-group row">
+      <label for="amazonLink5" class="label col-sm-3 col-form-label"
+        >Tracking Link 5</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          name="amazonLink5"
+          [(ngModel)]="editObject.amazonLink5"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="pros5" class="label col-sm-3 col-form-label">Pros 5</label>
+      <div class="col-sm-9">
+        <ng-select
+          [multiple]="true"
+          [addTag]="true"
+          [(ngModel)]="editObject.pros5"
+          name="pros5"
+          [items]="dummyArr"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="cons5" class="label col-sm-3 col-form-label">Cons 5</label>
+      <div class="col-sm-9">
+        <ng-select
+          [multiple]="true"
+          [addTag]="true"
+          [(ngModel)]="editObject.cons5"
+          name="cons5"
+          [items]="dummyArr"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="form-group row">
       <label for="longDesLast" class="label col-sm-3 col-form-label"
         >End Content</label
       >
@@ -459,9 +554,10 @@
     </div>
     <div class="row">
       <div class="offset-md-2 com-md-8 text-center">
-        <img [src]="editObject.img" class="marginAuto" />
+        <img [src]="editObject.img" class="marginAuto" style="width:50vw" />
       </div>
     </div>
+    <br>
     <div class="row" *ngIf="croppedImage">
       <div class="offset-md-2 com-md-8 text-center">
         <img [src]="croppedImage" class="marginAuto" />
