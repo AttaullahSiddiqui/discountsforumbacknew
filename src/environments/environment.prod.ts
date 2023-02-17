@@ -6,12 +6,11 @@
 export const environment = {
   production: true,
   firebaseConfig: {
-    apiKey: "AIzaSyDHCxgoT5VnGXiCcmMpSnkrOLMcPoYBwsw",
-    authDomain: "buymedeal-aacd9.firebaseapp.com",
-    databaseURL: "https://buymedeal-aacd9.firebaseio.com",
-    projectId: "buymedeal-aacd9",
-    storageBucket: "buymedeal-aacd9.appspot.com",
-    messagingSenderId: "805894285453",
-    appId: "1:805894285453:web:57c5df8686c757e929dac4",
+    apiKey: "AIzaSyDpSDL47t5vRkiqpYKXSPISbj257qImeFg",
+    authDomain: "discountsforum-3ea6f.firebaseapp.com",
+    projectId: "discountsforum-3ea6f",
+    storageBucket: "discountsforum-3ea6f.appspot.com",
+    messagingSenderId: "254926587110",
+    appId: "1:254926587110:web:546952aa546f49fad2e727",
   },
 };

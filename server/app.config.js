@@ -2,8 +2,8 @@ const config = {
     // MongoDB connection
     db: {
         development: 'mongodb://localhost:27017/duarestaurant',
+        production: 'mongodb+srv://danish:discountsforum123@cluster0.of4rh.mongodb.net/main?retryWrites=true&w=majority'
         // production: 'mongodb+srv://attaullah:mongocluster@cluster0-jrlh5.mongodb.net/test?retryWrites=true&w=majority'
-        production: 'mongodb+srv://danish:buymedeal123@cluster0.qmhmg.mongodb.net/main?retryWrites=true&w=majority'
     },
     JWT: {
         secretKey: 'hfgs97454089jbjsdfsdvf87032603jb'
@@ -15,7 +15,7 @@ const config = {
     },
     local: {
         url: "mongodb://localhost:27017/codesarrival",
-        dbname: "codesarrival"
+        dbname: "discountsforum"
     }
 }
 

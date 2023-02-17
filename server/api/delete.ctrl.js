@@ -4,7 +4,6 @@ let Store = require('../Models/stores.model');
 let Coupon = require('../Models/coupon.model');
 let Blog = require('../Models/blog.model');
 let BlogItem = require('../Models/blogItems.model');
-let gridProduct = require('../Models/gridProduct.model');
 let Banner = require('../Models/banner.model');
 let postImg = require('../Models/postImage.model');
 let Product = require('../Models/product.model');
@@ -19,8 +18,7 @@ module.exports = {
     deleteBanner: deleteBanner,
     deletePostImage: deletePostImage,
     deleteProduct: deleteProduct,
-    deleteBlogItem: deleteBlogItem,
-    deleteProductForBlog: deleteProductForBlog
+    deleteBlogItem: deleteBlogItem
 };
 
 function deleteCategory(req, res) {
@@ -73,15 +71,6 @@ function deleteBlogItem(req, res) {
         else if (!deletedNode) res.json(resHandler.respondError("Some error occured", -3));
         else {
             res.json(resHandler.respondSuccess(deletedNode, "Blog Item deleted successfully", 2));
-        }
-    })
-}
-function deleteProductForBlog(req, res) {
-    gridProduct.deleteOne({ _id: req.body._id }, function (err, deletedNode) {
-        if (err) res.json(resHandler.respondError(err[0], err[1] || -1));
-        else if (!deletedNode) res.json(resHandler.respondError("Some error occured", -3));
-        else {
-            res.json(resHandler.respondSuccess(deletedNode, "Grid product deleted successfully", 2));
         }
     })
 }

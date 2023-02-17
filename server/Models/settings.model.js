@@ -1,9 +1,7 @@
 let mongoose = require('mongoose');
 
 let settingsSchema = mongoose.Schema({
-    tags: { type: Array, required: true },
-    eventName: { type: String },
-    eventBarText: { type: String },
+    tags: { type: Array, required: true }
 });
 module.exports = mongoose.model('Settings', settingsSchema);
 
