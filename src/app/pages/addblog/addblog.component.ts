@@ -28,14 +28,24 @@ export class AddBlogComponent implements OnDestroy {
         "strikeThrough",
         "|",
         "link",
+        "bulletedList",
+        "numberedList",
         "|",
         "outdent",
         "indent",
         "|",
+        "ImageInsert",
+        "ImageCaption",
+        "mediaEmbed",
+        "blockQuote",
+        "insertTable",
         "fontBackgroundColor",
         "fontColor",
         "highlight",
         "alignment",
+        "code",
+        "codeBlock",
+        "htmlEmbed",
         "horizontalLine",
         "sourceEditing",
         "undo",
@@ -43,6 +53,20 @@ export class AddBlogComponent implements OnDestroy {
       ],
       shouldNotGroupWhenFull: true,
       viewportTopOffset: 60,
+    },
+    image: {
+      toolbar: [
+        "imageStyle:inline",
+        "imageStyle:block",
+        "imageStyle:side",
+        "imageStyle:alignLeft",
+        "imageStyle:alignRight",
+        "imageStyle:alignCenter",
+        "|",
+        "imageResize",
+        "imageTextAlternative",
+        "toggleImageCaption",
+      ],
     },
     heading: {
       options: [
@@ -96,7 +120,22 @@ export class AddBlogComponent implements OnDestroy {
       ],
       supportAllValues: true,
     },
+    table: {
+      contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
+    },
+    allowedContent:
+      "h1 h2 h3 p blockquote strong em button;" +
+      "a[!href];" +
+      "div[class,id]" +
+      "span[class,id]" +
+      "br" +
+      "hr" +
+      "iframe[src,style,marginwidth,marginheight,scrolling]" +
+      "img(left,right)[!src,alt,width,height];",
+    extraAllowedContent:
+      "span;ul;li;button;table;td;class;style;*[id];*(*);*{*}",
     removeFormatAttributes: "",
+    fullPage: true,
     language: "en",
     placeholder: "Type the content here!",
   };
