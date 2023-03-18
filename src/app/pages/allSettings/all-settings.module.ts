@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { ImageCropperModule } from "ngx-image-cropper";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -29,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     NbActionsModule,
     NbSelectModule,
     NbSpinnerModule,
+    ImageCropperModule,
   ],
   declarations: [AllSettingsComponent],
 })

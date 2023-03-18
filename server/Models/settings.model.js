@@ -1,9 +1,12 @@
-let mongoose = require('mongoose');
+let mongoose = require("mongoose");
 
 let settingsSchema = mongoose.Schema({
-    tags: { type: Array, required: true }
+  eventName: { type: String },
+  eventBarText: { type: String },
+  tags: { type: Array, required: true },
+  img: { type: String },
 });
-module.exports = mongoose.model('Settings', settingsSchema);
+module.exports = mongoose.model("Settings", settingsSchema);
 
 // let settingsSchema = mongoose.Schema({
 //     categoriesMeta: { type: String, required: true },
@@ -37,4 +40,3 @@ module.exports = mongoose.model('Settings', settingsSchema);
 //     },
 //     tags: { type: Array, required: true }
 // });
-
