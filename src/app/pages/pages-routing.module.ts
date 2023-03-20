@@ -22,6 +22,7 @@ import { SliderComponent } from "./slider/slider.component";
 import { AddBannerComponent } from "./addbanner/addbanner.component";
 import { AddPostImageComponent } from "./addpostimage/addpostimage.component";
 import { SortStoresComponent } from "./sortstores/sort-stores.component";
+import { BlogCommentComponent } from "./blogcomment/blogcomment.component";
 
 const routes: Routes = [
   {
@@ -96,6 +97,11 @@ const routes: Routes = [
       {
         path: "allblogs",
         component: AllBlogsComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "blogcomments",
+        component: BlogCommentComponent,
         canActivate: [UtilityService],
       },
       {

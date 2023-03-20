@@ -25,6 +25,7 @@ import { SliderModule } from "./slider/slider.module";
 import { AddBannerModule } from "./addbanner/addbanner.module";
 import { AddPostImageModule } from "./addpostimage/addpostimage.module";
 import { SortStoresModule } from "./sortstores/sort-stores.module";
+import { BlogCommentModule } from "./blogcomment/blogcomment.module";
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { SortStoresModule } from "./sortstores/sort-stores.module";
     AllBlogsModule,
     SliderModule,
     EmailListModule,
+    BlogCommentModule,
     MiscellaneousModule,
   ],
   declarations: [PagesComponent],

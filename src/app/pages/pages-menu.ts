@@ -109,6 +109,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "All Blogs",
         link: "/pages/allblogs",
       },
+      {
+        title: "Blog Comments",
+        link: "/pages/blogcomments",
+      },
     ],
   },
   {

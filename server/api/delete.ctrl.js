@@ -7,18 +7,20 @@ let BlogItem = require('../Models/blogItems.model');
 let Banner = require('../Models/banner.model');
 let postImg = require('../Models/postImage.model');
 let Product = require('../Models/product.model');
+let blogComments = require("../Models/blogcomments.model");
 let resHandler = require('../utils/responseHandler');
 
 module.exports = {
-    deleteCategory: deleteCategory,
-    deleteStore: deleteStore,
-    deleteCoupon: deleteCoupon,
-    deleteBlog: deleteBlog,
-    deleteUser: deleteUser,
-    deleteBanner: deleteBanner,
-    deletePostImage: deletePostImage,
-    deleteProduct: deleteProduct,
-    deleteBlogItem: deleteBlogItem
+  deleteCategory: deleteCategory,
+  deleteStore: deleteStore,
+  deleteCoupon: deleteCoupon,
+  deleteBlog: deleteBlog,
+  deleteUser: deleteUser,
+  deleteBanner: deleteBanner,
+  deletePostImage: deletePostImage,
+  deleteProduct: deleteProduct,
+  deleteBlogItem: deleteBlogItem,
+  deleteBlogComment: deleteBlogComment,
 };
 
 function deleteCategory(req, res) {
@@ -73,6 +75,22 @@ function deleteBlogItem(req, res) {
             res.json(resHandler.respondSuccess(deletedNode, "Blog Item deleted successfully", 2));
         }
     })
+}
+function deleteBlogComment(req, res) {
+  blogComments.deleteOne({ _id: req.body._id }, function (err, deletedNode) {
+    if (err) res.json(resHandler.respondError(err[0], err[1] || -1));
+    else if (!deletedNode)
+      res.json(resHandler.respondError("Some error occured", -3));
+    else {
+      res.json(
+        resHandler.respondSuccess(
+          deletedNode,
+          "Comment deleted successfully",
+          2
+        )
+      );
+    }
+  });
 }
 function deleteAllCoupons(storeId) {
     Coupon.deleteMany({ storeId: storeId }, function (err, deletedNode) {

@@ -44,6 +44,8 @@ router.get("/fetchPostImagesById", fetchCtrl.fetchPostImagesById);
 router.get("/fetchProductsById", fetchCtrl.fetchProductsById);
 router.get("/fetchBlogItemsById", fetchCtrl.fetchBlogItemsById);
 router.get("/fetchSettingsData", fetchCtrl.fetchSettingsData);
+router.get("/fetchUnApprovedComments", fetchCtrl.fetchUnApprovedComments);
+router.get("/fetchApprovedComments", fetchCtrl.fetchApprovedComments);
 
 router.post("/editUser", putCtrl.editUser);
 router.post("/editCategory", putCtrl.editCategory);
@@ -56,6 +58,7 @@ router.post("/updateProduct", putCtrl.updateProduct);
 router.post("/updateBlogItem", putCtrl.updateBlogItem);
 router.post("/changeallCouponsDate", putCtrl.changeallCouponsDate);
 router.post("/updateSettings", putCtrl.updateSettings);
+router.post("/approveBlogComment", putCtrl.approveBlogComment);
 
 router.post("/deleteCategory", dltCtrl.deleteCategory);
 router.post("/deleteStore", dltCtrl.deleteStore);
@@ -66,6 +69,7 @@ router.post("/deleteBanner", dltCtrl.deleteBanner);
 router.post("/deletePostImage", dltCtrl.deletePostImage);
 router.post("/deleteProduct", dltCtrl.deleteProduct);
 router.post("/deleteBlogItem", dltCtrl.deleteBlogItem);
+router.post("/deleteBlogComment", dltCtrl.deleteBlogComment);
 
 router.post("/sortCoupons", sortCtrl.sortCoupons);
 router.post("/reArrangeCoupons", sortCtrl.reArrangeCoupons);
