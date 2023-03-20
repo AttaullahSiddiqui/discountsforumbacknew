@@ -5,6 +5,7 @@ let settingsSchema = mongoose.Schema({
   eventBarText: { type: String },
   tags: { type: Array, required: true },
   img: { type: String },
+  imgLink: { type: String },
 });
 module.exports = mongoose.model("Settings", settingsSchema);
 

@@ -75,7 +75,6 @@
                 type="file"
                 name="imge"
                 (change)="fileChangeEvent($event)"
-                required
                 [(ngModel)]="imgModel"
                 class="custom-file-input"
                 accept="image/x-png,image/jpeg"
@@ -96,6 +95,22 @@
           >
           </image-cropper>
           <br />
+          <div class="form-group row">
+            <label for="imgLink" class="label col-sm-3 col-form-label"
+              >Image Link</label
+            >
+            <div class="col-sm-9">
+              <input
+                type="text"
+                nbInput
+                fullWidth
+                name="imgLink"
+                [(ngModel)]="mainObject.imgLink"
+                placeholder="Image associated link.."
+              />
+            </div>
+          </div>
+          <br>
           <div class="form-group row">
             <div class="offset-sm-3 col-sm-9">
               <button

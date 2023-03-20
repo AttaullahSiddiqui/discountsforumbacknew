@@ -16,7 +16,8 @@ export class AllSettingsComponent implements OnDestroy {
     tags: "",
     eventName: "",
     eventBarText: "",
-    img:null
+    img: null,
+    imgLink: "",
   };
   selectedImage: any = null;
   imageChangedEvent: any = "";
