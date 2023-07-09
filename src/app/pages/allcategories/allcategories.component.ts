@@ -47,15 +47,19 @@ export class AllCategoriesComponent {
         title: "Username",
         type: "string",
       },
-      slug: {
-        title: "Slug",
+      metaTitle: {
+        title: "Meta Title",
         type: "string",
       },
-      featuredForHome: {
-        title: "Featured on Home",
-        type: "custom",
-        renderComponent: CustomRenderComponent,
+      metaDescription: {
+        title: "Meta Description",
+        type: "string",
       },
+      // featuredForHome: {
+      //   title: "Featured on Home",
+      //   type: "custom",
+      //   renderComponent: CustomRenderComponent,
+      // },
     },
     actions: {
       add: false,
