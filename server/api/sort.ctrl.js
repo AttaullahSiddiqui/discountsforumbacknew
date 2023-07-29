@@ -17,10 +17,7 @@ module.exports = {
 
 function sortCoupons(req, res) {
     req.body.forEach(elm => {
-        Coupon.updateOne({ _id: elm._id }, elm, function (err, data) {
-            if (err) console.log(err)
-            else console.log("Alad")
-        })
+        Coupon.updateOne({ _id: elm._id }, elm, function (err, data) {})
     });
     res.json(resHandler.respondSuccess({ success: true }, "Coupons updated successfully", 2));
 }

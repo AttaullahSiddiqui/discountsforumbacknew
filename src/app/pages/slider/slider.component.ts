@@ -72,10 +72,11 @@ export class SliderComponent implements OnDestroy {
         if (data) {
           sliderNode.img = data;
           sliderNode.arrIndex = indName;
-          self.slides.forEach((element) => {
-            if (element.arrIndex == indName)
-              self._dataService.deleteMedia(element.img);
-          });
+          if (self.slides)
+            self.slides.forEach((element) => {
+              if (element.arrIndex == indName)
+                self._dataService.deleteMedia(element.img);
+            });
           self.uploadSlide(sliderNode);
         }
       })
