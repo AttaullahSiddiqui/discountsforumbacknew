@@ -75,6 +75,9 @@ export class AllCouponsComponent {
     actions: {
       add: false,
     },
+    pager: {
+      perPage: 40,
+    },
   };
 
   source: LocalDataSource = new LocalDataSource();
