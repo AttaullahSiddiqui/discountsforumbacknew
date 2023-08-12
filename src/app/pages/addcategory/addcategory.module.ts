@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { ImageCropperModule } from "ngx-image-cropper";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -27,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     NbActionsModule,
     NbSpinnerModule,
     NbCheckboxModule,
+    ImageCropperModule,
   ],
   declarations: [AddCategoryComponent],
 })

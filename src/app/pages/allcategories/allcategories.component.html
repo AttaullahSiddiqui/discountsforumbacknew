@@ -3,13 +3,176 @@
 
   <nb-card-body>
     <h2 *ngIf="notAdmin">Only admins can change/modify Users!</h2>
-    <ng2-smart-table
+    <!-- <ng2-smart-table
       [settings]="settings"
       [source]="source"
       (deleteConfirm)="onDeleteConfirm($event)"
       (editConfirm)="onSaveConfirm($event)"
       *ngIf="!notAdmin"
+    > -->
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (edit)="openEditForm($event, categoryEditModal)"
+      *ngIf="!notAdmin"
     >
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
+
+<ng-template #categoryEditModal let-data>
+  <!-- <h2>Hello from modal</h2> -->
+  <form
+    #editCatForm="ngForm"
+    novalidate
+    (ngSubmit)="uploadCategoryImage(editObject)"
+  >
+    <div class="form-group row">
+      <label for="title" class="label col-sm-3 col-form-label">Name</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          required
+          name="name"
+          [(ngModel)]="editObject.name"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="label col-sm-3 col-form-label">Slug</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          required
+          name="slug"
+          [(ngModel)]="editObject.slug"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="label col-sm-3 col-form-label"
+        >Meta Title</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          required
+          name="metaTitle"
+          [(ngModel)]="editObject.metaTitle"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="label col-sm-3 col-form-label"
+        >Meta Description</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          required
+          name="metaDescription"
+          [(ngModel)]="editObject.metaDescription"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="label col-sm-3 col-form-label"
+        >Meta Keywords</label
+      >
+      <div class="col-sm-9">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          required
+          name="metaKeywords"
+          [(ngModel)]="editObject.metaKeywords"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="offset-md-2 col-md-8 text-center">
+        <img [src]="editObject.img" class="mx-auto" style="max-width: 40vw" />
+      </div>
+    </div>
+    <br />
+    <div class="row" *ngIf="croppedImage">
+      <div class="offset-md-2 col-md-8 text-center">
+        <img [src]="croppedImage" class="marginAuto" />
+        <br />
+        <br />
+        <button
+          nbButton
+          status="danger"
+          size="medium"
+          (click)="clearCroppedImage()"
+        >
+          Clear
+        </button>
+        <br />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="imge" class="label col-sm-3 col-form-label">Image</label>
+      <div class="col-sm-9">
+        <input
+          type="file"
+          name="imge"
+          (change)="fileChangeEvent($event)"
+          [(ngModel)]="imgModel"
+          class="custom-file-input"
+          accept="image/x-png,image/jpeg"
+        />
+        <label class="custom-file-label" for="inputGroupFile01"
+          >{{ htmlContent }}{{ imgModel }}</label
+        >
+      </div>
+    </div>
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      outputType="file"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+    >
+    </image-cropper>
+    <br />
+    <div class="validation-checkboxes">
+      <nb-checkbox
+        status="success"
+        name="featuredForHome"
+        [(ngModel)]="editObject.featuredForHome"
+        #catFeatured="ngModel"
+        >Featured for Home</nb-checkbox
+      >
+    </div>
+    <br />
+    <br />
+    <div class="form-group row">
+      <div class="offset-sm-1 col-sm-11">
+        <button
+          nbButton
+          status="primary"
+          size="medium"
+          [nbSpinner]="isBusy"
+          nbSpinnerStatus="primary"
+          nbSpinnerSize="medium"
+          [disabled]="!editCatForm.form.valid || !editCatForm.dirty"
+          type="submit"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
