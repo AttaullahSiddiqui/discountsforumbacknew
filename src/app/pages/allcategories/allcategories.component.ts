@@ -8,8 +8,9 @@ import { DataService } from "../../@core/utils/data.service";
 import { UtilityService } from "../../@core/utils/utility.service";
 import { LocalDataSource } from "ng2-smart-table";
 import { CustomRenderComponent } from "./customaction.component";
-import { NbWindowService } from "@nebular/theme";
+import { NbDialogService, NbWindowService } from "@nebular/theme";
 import { ImageCroppedEvent, base64ToFile } from "ngx-image-cropper";
+import { DeletePromptComponent } from "../allcoupons/delete-prompt/delete-prompt.component";
 
 @Component({
   selector: "ngx-allcategories",
@@ -86,6 +87,7 @@ export class AllCategoriesComponent {
   constructor(
     private _dataService: DataService,
     private windowService: NbWindowService,
+    private dialogService: NbDialogService,
     private _utlityService: UtilityService
   ) {}
 
@@ -98,6 +100,8 @@ export class AllCategoriesComponent {
       .subscribe((res) => {
         if (res.data) {
           const data = res.data;
+          this.catArray = [];
+          this.catArray = data;
           this.source.load(data);
         } else {
           this._dataService.showErrorToast(res.message);
@@ -139,6 +143,7 @@ export class AllCategoriesComponent {
       if (res.data) {
         this._dataService.showSuccessToast(res.message);
         this.catArray[this.editKey] = res.data;
+        this.source.refresh();
         this.editObject = "";
         this.isBusy = false;
       } else {
@@ -161,23 +166,29 @@ export class AllCategoriesComponent {
       });
   }
   onDeleteConfirm(event): void {
-    if (window.confirm("Are you sure you want to delete?")) {
-      this._dataService
-        .postAPI("/api/deleteCategory", {
-          _id: event.data._id,
-        })
-        .subscribe((res) => {
-          if (res.data) {
-            this._dataService.showSuccessToast(res.message);
-            event.confirm.resolve();
-          } else {
-            this._dataService.showErrorToast(res.message);
-            event.confirm.reject();
-          }
-        });
-    } else {
-      event.confirm.reject();
-    }
+    var self = this;
+    this._dataService
+      .postAPI("/api/deleteCategory", {
+        _id: event.data._id,
+      })
+      .subscribe((res) => {
+        if (res.data) {
+          this._dataService.showSuccessToast(res.message);
+          if (event.data.img) self._dataService.deleteMedia(event.data.img);
+          this.catArray.splice(this.dltIndex, 1);
+          this.source.refresh();
+        } else {
+          this._dataService.showErrorToast(res.message);
+        }
+      });
+  }
+  openDeletePrompt(event: any) {
+    this.dltIndex = event.index;
+    this.dialogService
+      .open(DeletePromptComponent)
+      .onClose.subscribe((dltVal) => {
+        if (dltVal) this.onDeleteConfirm(event);
+      });
   }
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;

@@ -13,7 +13,7 @@
     <ng2-smart-table
       [settings]="settings"
       [source]="source"
-      (deleteConfirm)="onDeleteConfirm($event)"
+      (delete)="openDeletePrompt($event)"
       (edit)="openEditForm($event, categoryEditModal)"
       *ngIf="!notAdmin"
     >
