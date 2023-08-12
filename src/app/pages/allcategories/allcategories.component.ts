@@ -140,7 +140,11 @@ export class AllCategoriesComponent {
         this._dataService.showSuccessToast(res.message);
         this.catArray[this.editKey] = res.data;
         this.editObject = "";
-      } else this._dataService.showErrorToast(res.message);
+        this.isBusy = false;
+      } else {
+        this._dataService.showErrorToast(res.message);
+        this.isBusy = false;
+      }
     });
   }
   onSaveConfirm(event): void {
