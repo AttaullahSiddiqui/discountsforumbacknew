@@ -26,6 +26,7 @@ import { AddBannerModule } from "./addbanner/addbanner.module";
 import { AddPostImageModule } from "./addpostimage/addpostimage.module";
 import { SortStoresModule } from "./sortstores/sort-stores.module";
 import { BlogCommentModule } from "./blogcomment/blogcomment.module";
+import { AutoFetchModule } from "./autofetch/autofetch.module";
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { BlogCommentModule } from "./blogcomment/blogcomment.module";
     EmailListModule,
     BlogCommentModule,
     MiscellaneousModule,
+    AutoFetchModule,
   ],
   declarations: [PagesComponent],
 })

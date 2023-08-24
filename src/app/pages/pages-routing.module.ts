@@ -23,6 +23,7 @@ import { AddBannerComponent } from "./addbanner/addbanner.component";
 import { AddPostImageComponent } from "./addpostimage/addpostimage.component";
 import { SortStoresComponent } from "./sortstores/sort-stores.component";
 import { BlogCommentComponent } from "./blogcomment/blogcomment.component";
+import { AutoFetchComponent } from "./autofetch/autofetch.component";
 
 const routes: Routes = [
   {
@@ -122,6 +123,11 @@ const routes: Routes = [
       {
         path: "addpostimage",
         component: AddPostImageComponent,
+        canActivate: [UtilityService],
+      },
+      {
+        path: "autofetch",
+        component: AutoFetchComponent,
         canActivate: [UtilityService],
       },
       {

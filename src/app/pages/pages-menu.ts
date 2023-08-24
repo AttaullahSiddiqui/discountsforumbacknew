@@ -26,6 +26,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: "/pages/settings",
   },
   {
+    title: "AutoFetch",
+    icon: "clipboard-outline",
+    link: "/pages/autofetch",
+  },
+  {
     title: "Data Entry",
     group: true,
   },

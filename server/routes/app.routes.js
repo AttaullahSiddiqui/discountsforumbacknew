@@ -46,6 +46,7 @@ router.get("/fetchBlogItemsById", fetchCtrl.fetchBlogItemsById);
 router.get("/fetchSettingsData", fetchCtrl.fetchSettingsData);
 router.get("/fetchUnApprovedComments", fetchCtrl.fetchUnApprovedComments);
 router.get("/fetchApprovedComments", fetchCtrl.fetchApprovedComments);
+router.get("/fetchBrandData", fetchCtrl.fetchBrandData);
 
 router.post("/editUser", putCtrl.editUser);
 router.post("/editCategory", putCtrl.editCategory);

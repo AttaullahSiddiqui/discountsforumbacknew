@@ -11,6 +11,14 @@ let Settings = require("../Models/settings.model");
 let userEmails = require("../Models/userEmails.model");
 let blogComments = require("../Models/blogcomments.model");
 let resHandler = require("../utils/responseHandler");
+let brandArray = [
+  {
+    name: "Admitad",
+    id: "admitad",
+    email: "officialdiscountsforum@gmail.com",
+    pwd: "xUWutbiUvXPd@f9",
+  },
+];
 
 module.exports = {
   fetchCategories: fetchCategories,
@@ -31,6 +39,7 @@ module.exports = {
   fetchEmails: fetchEmails,
   fetchUnApprovedComments: fetchUnApprovedComments,
   fetchApprovedComments: fetchApprovedComments,
+  fetchBrandData: fetchBrandData,
 };
 
 function fetchCategories(req, res) {
@@ -321,7 +330,7 @@ function fetchUnApprovedComments(req, res) {
 }
 function fetchApprovedComments(req, res) {
   blogComments
-    .find({active:true})
+    .find({ active: true })
     .populate("blogId", "title")
     .exec(function (err, comments) {
       if (err) res.json(resHandler.respondError(err[0], err[1] || -1));
@@ -338,4 +347,17 @@ function fetchApprovedComments(req, res) {
           )
         );
     });
+}
+function fetchBrandData(req, res) {
+  console.log(req.query._id);
+  let options = {
+    method: "GET",
+    url: "",
+  };
+  for (var i = 0; i < brandArray.length; i++) {
+    if (brandArray[i].id == req.query._id) {
+      options.url = brandArray[i].url;
+      break;
+    }
+  }
 }
