@@ -32,6 +32,7 @@
     "@nebular/security": "8.0.0",
     "@nebular/theme": "8.0.0",
     "@ng-select/ng-select": "^7.4.0",
+    "axios": "^1.4.0",
     "body-parser": "^1.20.1",
     "bootstrap": "4.3.1",
     "ckeditor": "4.7.3",

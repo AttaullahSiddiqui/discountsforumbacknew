@@ -11,6 +11,7 @@ let Settings = require("../Models/settings.model");
 let userEmails = require("../Models/userEmails.model");
 let blogComments = require("../Models/blogcomments.model");
 let resHandler = require("../utils/responseHandler");
+const axios = require("axios");
 let brandArray = [
   {
     name: "Admitad",
@@ -352,12 +353,15 @@ function fetchBrandData(req, res) {
   console.log(req.query._id);
   let options = {
     method: "GET",
-    url: "",
+    url: "https://export.admitad.com/en/webmaster/websites/2462850/products/export_adv_products/?user=simtiaz&code=hh9kh78idr&format=xml&currency=&feed_id=23774&last_import=",
   };
-  for (var i = 0; i < brandArray.length; i++) {
-    if (brandArray[i].id == req.query._id) {
-      options.url = brandArray[i].url;
-      break;
-    }
-  }
+  // for (var i = 0; i < brandArray.length; i++) {
+  //   if (brandArray[i].id == req.query._id) {
+  //     options.url = brandArray[i].url;
+  //     break;
+  //   }
+  // }
+  axios(options).then((response) => {
+    console.log(response.data);
+  });
 }
