@@ -11,7 +11,7 @@ let Settings = require("../Models/settings.model");
 let userEmails = require("../Models/userEmails.model");
 let blogComments = require("../Models/blogcomments.model");
 let resHandler = require("../utils/responseHandler");
-const axios = require("axios");
+// const axios = require("axios");
 let brandArray = [
   {
     name: "Admitad",
@@ -361,7 +361,7 @@ function fetchBrandData(req, res) {
   //     break;
   //   }
   // }
-  axios(options).then((response) => {
-    console.log(response.data);
-  });
+  // axios(options).then((response) => {
+  //   console.log(response.data);
+  // });
 }

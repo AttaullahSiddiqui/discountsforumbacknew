@@ -152,6 +152,11 @@
               [(ngModel)]="couponInfo.featuredForHome"
               >Featured for Home</nb-checkbox
             ><nb-checkbox
+              status="warning"
+              name="exclusive"
+              [(ngModel)]="couponInfo.exclusive"
+              >Exclusive</nb-checkbox
+            ><nb-checkbox
               status="danger"
               name="trending"
               [(ngModel)]="couponInfo.trending"
@@ -161,8 +166,9 @@
               name="newArrival"
               [(ngModel)]="couponInfo.newArrival"
               >New Arrival</nb-checkbox
-            ><nb-checkbox
-              status="warning"
+            >
+            <nb-checkbox
+              status="secondary"
               name="forEvent"
               [(ngModel)]="couponInfo.forEvent"
               >Show on Event Page</nb-checkbox

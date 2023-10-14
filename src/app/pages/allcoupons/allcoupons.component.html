@@ -203,6 +203,12 @@
         [(ngModel)]="editObject.featuredForHome"
         >Featured for Home</nb-checkbox
       ><nb-checkbox
+        status="warning"
+        name="exclusive"
+        [(ngModel)]="editObject.exclusive"
+        >Exclusive</nb-checkbox
+      >
+      <nb-checkbox
         status="danger"
         name="trending"
         [(ngModel)]="editObject.trending"
@@ -213,7 +219,7 @@
         [(ngModel)]="editObject.newArrival"
         >New Arrival</nb-checkbox
       ><nb-checkbox
-        status="warning"
+        status="secondary"
         name="forEvent"
         [(ngModel)]="editObject.forEvent"
         >Show on Event Page</nb-checkbox

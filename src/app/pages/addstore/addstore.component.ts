@@ -165,6 +165,7 @@ export class AddStoreComponent implements OnDestroy {
     if (!storeNode.topStore) storeNode.topStore = false;
     storeNode.storeURL = storeNode.name.replace(/ /g, "-").toLowerCase();
     this._dataService.postAPI("/api/addStore", storeNode).subscribe((res) => {
+      console.log(res)
       if (res.data) {
         this._dataService.showSuccessToast(res.message);
         this.storeInfo = {};

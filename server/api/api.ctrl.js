@@ -318,6 +318,7 @@ function addCouponCallback(req, res) {
     trending: req.body.trending,
     newArrival: req.body.newArrival,
     sortNo: req.body.sortNo,
+    exclusive: req.body.trending,
   });
   newCoupon.save().then(
     function (result) {

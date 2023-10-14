@@ -40,6 +40,7 @@ export class AddCouponComponent implements OnDestroy {
     if (!couponData.featuredForHome) couponData.featuredForHome = false;
     if (!couponData.newArrival) couponData.newArrival = false;
     if (!couponData.forEvent) couponData.forEvent = false;
+    if (!couponData.exclusive) couponData.exclusive = false;
     if (couponData.activeStatus) couponData.code = "";
 
     this._dataService.postAPI("/api/addCoupon", couponData).subscribe((res) => {
