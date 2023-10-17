@@ -100,7 +100,7 @@ export class AddStoreComponent implements OnDestroy {
     placeholder: "Type the content here!",
   };
   showList: boolean;
-  storeInfo: any = { shortDes: "", longDes: "" };
+  storeInfo: any = { shortDes: "", longDes: "", rating: 1 };
   categories: any;
   isBusy = false;
   selectedImage: any = null;
@@ -165,10 +165,9 @@ export class AddStoreComponent implements OnDestroy {
     if (!storeNode.topStore) storeNode.topStore = false;
     storeNode.storeURL = storeNode.name.replace(/ /g, "-").toLowerCase();
     this._dataService.postAPI("/api/addStore", storeNode).subscribe((res) => {
-      console.log(res)
       if (res.data) {
         this._dataService.showSuccessToast(res.message);
-        this.storeInfo = {};
+        this.storeInfo = {rating:1};
         this.imgModel = "";
         this.imgModel2 = "";
         this.croppedImage = "";
@@ -205,7 +204,6 @@ export class AddStoreComponent implements OnDestroy {
       this.croppedImage2 = reader.result;
     };
   }
-
   ngOnDestroy() {
     this.alive = false;
   }

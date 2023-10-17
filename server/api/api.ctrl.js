@@ -151,6 +151,7 @@ function addStore(req, res) {
     metaTitle: req.body.metaTitle,
     metaDes: req.body.metaDes,
     metaKeywords: req.body.metaKeywords,
+    rating: req.body.rating,
     fb: req.body.fb,
     pin: req.body.pin,
     wik: req.body.wik,
