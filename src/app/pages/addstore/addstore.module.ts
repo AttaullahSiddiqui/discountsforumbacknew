@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 import { ImageCropperModule } from "ngx-image-cropper";
-import { CloudinaryModule } from "@cloudinary/ng";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -39,8 +38,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     NbRadioModule,
     NbDatepickerModule,
     CKEditorModule,
-    ImageCropperModule,
-    CloudinaryModule,
+    ImageCropperModule
   ],
   declarations: [AddStoreComponent],
 })
