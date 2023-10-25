@@ -13,6 +13,7 @@ let BlogItem = require("../Models/blogItems.model");
 let Slider = require("../Models/slide.model");
 let errHandler = require("../utils/errorHandler");
 let resHandler = require("../utils/responseHandler");
+const cloudinary = require("../utils/cloudinary");
 
 module.exports = {
   authUser: authUser,
@@ -144,7 +145,8 @@ function addStore(req, res) {
     categoryRef: req.body.categoryRef,
     shortDes: req.body.shortDes,
     longDes: req.body.longDes,
-    img: req.body.img,
+    img: req.imgURI,
+    imgPublicId: req.imgPublicId,
     imgAlt: req.body.imgAlt,
     directUrl: req.body.directUrl,
     trackUrl: req.body.trackUrl,
@@ -164,11 +166,13 @@ function addStore(req, res) {
   });
   newStore.save().then(
     function (result) {
+      console.log("saved");
       res.json(
         resHandler.respondSuccess(result, "Store added successfully", 2)
       );
     },
     function (err) {
+      console.log("error agya");
       var error = errHandler.handle(err);
       res.json(resHandler.respondError(error[0], error[1] || -1));
     }
@@ -452,7 +456,8 @@ function addSlide(req, res) {
 function addNewSlide(req, res) {
   var newSlider = new Slider({
     link: req.body.link,
-    img: req.body.img,
+    img: req.imgURI,
+    imgPublicId: req.imgPublicId,
     storeId: req.body.storeId,
     arrIndex: req.body.arrIndex,
   });
@@ -469,6 +474,9 @@ function addNewSlide(req, res) {
   );
 }
 function updateSlide(req, res) {
+  var imgPublicId = req.body.imgPublicId;
+  req.body.img = req.imgURI;
+  req.body.imgPublicId = req.imgPublicId;
   Slider.findByIdAndUpdate(
     req.body._id,
     req.body,
@@ -477,14 +485,23 @@ function updateSlide(req, res) {
       if (err) res.json(resHandler.respondError(err[0], err[1] || -1));
       else if (!updatedNode)
         res.json(resHandler.respondError("Unknown error occured", -3));
-      else
-        res.json(
-          resHandler.respondSuccess(
-            updatedNode,
-            "Slider updated successfully",
-            2
-          )
-        );
+      else{
+        if (imgPublicId)deleteCloudinaryImage(imgPublicId);
+          res.json(
+            resHandler.respondSuccess(
+              updatedNode,
+              "Slider updated successfully",
+              2
+            )
+          );
+      }
     }
   );
+}
+function deleteCloudinaryImage(imgPublicId) {
+  cloudinary.uploader
+    .destroy(imgPublicId, {
+      invalidate: true,
+    })
+    .then((result) => console.log(result));
 }

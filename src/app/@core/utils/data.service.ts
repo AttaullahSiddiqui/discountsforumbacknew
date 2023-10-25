@@ -4,10 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { AngularFireStorage } from "@angular/fire/storage";
 import {
-  NbComponentStatus,
-  NbGlobalLogicalPosition,
   NbGlobalPhysicalPosition,
-  NbGlobalPosition,
   NbToastrService,
   NbToastrConfig,
 } from "@nebular/theme";
@@ -15,6 +12,7 @@ import {
 @Injectable()
 export class DataService {
   config: NbToastrConfig;
+
   constructor(
     private _http: HttpClient,
     private toastrService: NbToastrService,
@@ -111,5 +109,18 @@ export class DataService {
     };
 
     this.toastrService.show("Error", `${content}`, config);
+  }
+  base64ToFile(data, filename) {
+    const arr = data.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from "@angular/core";
 import { DataService } from "../../@core/utils/data.service";
 import * as customBuild from "../ckEditorCustomBuild/build/ckeditor.js";
+import { HttpService, Response } from "../../@core/utils/http.service";
 import { ImageCroppedEvent, base64ToFile } from "ngx-image-cropper";
 import { NbDialogService } from "@nebular/theme";
 import { DeletePromptComponent } from "../allcoupons/delete-prompt/delete-prompt.component";
@@ -124,7 +125,8 @@ export class EditStoreComponent implements OnDestroy {
 
   constructor(
     private _dataService: DataService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private _http: HttpService
   ) {}
 
   ngOnInit() {
@@ -151,7 +153,10 @@ export class EditStoreComponent implements OnDestroy {
   confirmDelete() {
     var self = this;
     this._dataService
-      .postAPI("/api/deleteStore", { _id: this.loadedStoreId })
+      .postAPI("/api/deleteStore", {
+        _id: this.loadedStoreId,
+        imgPublicId: this.storeInfo.imgPublicId,
+      })
       .subscribe((res) => {
         if (res.data) {
           self._dataService.showSuccessToast(res.message);
@@ -169,30 +174,52 @@ export class EditStoreComponent implements OnDestroy {
     this.updatingStore = true;
     var self = this;
     storeNode.storeURL = storeNode.name.replace(/ /g, "-").toLowerCase();
-    if (this.croppedImage) {
-      var filePath = `storeImages/_${new Date().getTime()}`;
-      this._dataService
-        .storeImage(filePath, this.selectedImage, function (error, data) {
-          if (error) {
-            self._dataService.showErrorToast(
-              "Can't upload image to the Server"
-            );
-            self.updatingStore = false;
-            return;
-          }
-          if (data) {
-            self._dataService.deleteMedia(storeNode.img);
-            storeNode.img = data;
-            self.clearCroppedImage();
-            if (self.croppedImage2) self.uploadNewThumbnail(storeNode);
-            else self.saveCallbackFunc(storeNode);
-          }
-        })
-        .subscribe();
-    } else {
-      if (self.croppedImage2) self.uploadNewThumbnail(storeNode);
-      else self.saveCallbackFunc(storeNode);
+    if (storeNode.trackUrl != this.oldStoreTrackUrl)
+      storeNode.updateCoupons = true;
+    const formData = new FormData();
+    for (var key in storeNode) {
+      formData.append(key, storeNode[key]);
     }
+    formData.append("uploadFile", this.selectedImage);
+    var self = this;
+    this._http
+      .post("/api/editStore", formData)
+      .then((result: Response) => {
+        self._dataService.showSuccessToast("Store updated successfully");
+        self.dataLoaded[this.loadedStoreIndex].name = result.body.data.name;
+        self.dataLoaded[this.loadedStoreIndex]._id = result.body.data._id;
+        self.storeInfo = result.body.data;
+        window.scrollTo(0, 0);
+        self.updatingStore = false;
+      })
+      .catch((error: Response) => {
+        self.updatingStore = false;
+        this._dataService.showErrorToast(error.error.message);
+      });
+    // if (this.croppedImage) {
+    //   var filePath = `storeImages/_${new Date().getTime()}`;
+    //   this._dataService
+    //     .storeImage(filePath, this.selectedImage, function (error, data) {
+    //       if (error) {
+    //         self._dataService.showErrorToast(
+    //           "Can't upload image to the Server"
+    //         );
+    //         self.updatingStore = false;
+    //         return;
+    //       }
+    //       if (data) {
+    //         self._dataService.deleteMedia(storeNode.img);
+    //         storeNode.img = data;
+    //         self.clearCroppedImage();
+    //         if (self.croppedImage2) self.uploadNewThumbnail(storeNode);
+    //         else self.saveCallbackFunc(storeNode);
+    //       }
+    //     })
+    //     .subscribe();
+    // } else {
+    //   if (self.croppedImage2) self.uploadNewThumbnail(storeNode);
+    //   else self.saveCallbackFunc(storeNode);
+    // }
   }
   uploadNewThumbnail(storeNode) {
     var self = this;
@@ -226,6 +253,7 @@ export class EditStoreComponent implements OnDestroy {
         self.storeInfo = res.data;
         window.scrollTo(0, 0);
         self.updatingStore = false;
+        this.clearCroppedImage();
       } else {
         self._dataService.showErrorToast(res.message);
         self.updatingStore = false;
@@ -247,7 +275,10 @@ export class EditStoreComponent implements OnDestroy {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.selectedImage = base64ToFile(event.base64);
+    this.selectedImage = this._dataService.base64ToFile(
+      event.base64,
+      this.imageChangedEvent.target.files[0].name
+    );
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedImage);
     reader.onloadend = () => {

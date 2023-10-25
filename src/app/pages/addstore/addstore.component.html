@@ -142,7 +142,7 @@
               />
             </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="offset-md-2 com-md-8 text-center">
               <img [src]="croppedImage2" class="marginAuto" />
             </div>
@@ -174,7 +174,7 @@
             format="png"
             (imageCropped)="imageCropped2($event)"
           >
-          </image-cropper>
+          </image-cropper> -->
           <div class="form-group row">
             <label for="directUrl" class="label col-sm-3 col-form-label"
               >Direct URL</label
@@ -259,7 +259,9 @@
                 type="number"
                 nbInput
                 fullWidth
-                required [min]="1" [max]="5"
+                required
+                [min]="1"
+                [max]="5"
                 name="rating"
                 [(ngModel)]="storeInfo.rating"
               />

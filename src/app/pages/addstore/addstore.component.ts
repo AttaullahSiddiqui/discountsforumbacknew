@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from "@angular/core";
 import { DataService } from "../../@core/utils/data.service";
+import { HttpService, Response } from "../../@core/utils/http.service";
 import * as customBuild from "../ckEditorCustomBuild/build/ckeditor.js";
 import { ImageCroppedEvent, base64ToFile } from "ngx-image-cropper";
 
@@ -100,7 +101,7 @@ export class AddStoreComponent implements OnDestroy {
     placeholder: "Type the content here!",
   };
   showList: boolean;
-  storeInfo: any = { shortDes: "", longDes: "", rating: 1 };
+  storeInfo: any = { shortDes: "", longDes: "", rating: 4 };
   categories: any;
   isBusy = false;
   selectedImage: any = null;
@@ -113,9 +114,10 @@ export class AddStoreComponent implements OnDestroy {
   htmlContent2: any;
   croppedImage: any = "";
   croppedImage2: any = "";
+  signatureNode: any;
   _self = this;
 
-  constructor(private _dataService: DataService) {}
+  constructor(private _dataService: DataService, private _http: HttpService) {}
 
   ngOnInit() {
     this._dataService.fetchAPI("/api/fetchCategories").subscribe((res) => {
@@ -123,64 +125,63 @@ export class AddStoreComponent implements OnDestroy {
         this.categories = res.data;
       } else this._dataService.showErrorToast(res.message);
     });
+    // this._dataService.fetchAPI("/cloudinaryDetails").subscribe((res) => {
+    //   console.log(res);
+    //   this.signatureNode = res;
+    // });
   }
   addStore(storeInfo) {
     if (this.isBusy) return;
     this.isBusy = true;
-    var self = this;
-    var filePath = `storeImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage, function (error, data) {
-        if (error) {
-          this._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          storeInfo.img = data;
-          if (self.croppedImage2) self.upoloadThumbImg(storeInfo);
-          else self.saveStoreToDB(storeInfo);
-        }
-      })
-      .subscribe();
-  }
-  upoloadThumbImg(storeInfo) {
-    var self = this;
-    var filePath2 = `storeThumbImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath2, this.selectedImage2, function (error, data) {
-        if (error) {
-          this._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          storeInfo.thumbImg = data;
-          self.saveStoreToDB(storeInfo);
-        }
-      })
-      .subscribe();
-  }
-
-  saveStoreToDB(storeNode) {
-    if (!storeNode.editorChoice) storeNode.editorChoice = false;
-    if (!storeNode.topStore) storeNode.topStore = false;
-    storeNode.storeURL = storeNode.name.replace(/ /g, "-").toLowerCase();
-    this._dataService.postAPI("/api/addStore", storeNode).subscribe((res) => {
-      if (res.data) {
-        this._dataService.showSuccessToast(res.message);
-        this.storeInfo = {rating:1};
-        this.imgModel = "";
-        this.imgModel2 = "";
-        this.croppedImage = "";
-        this.croppedImage2 = "";
-        this.selectedImage = "";
-        this.selectedImage2 = "";
-        this.imageChangedEvent = "";
-        this.imageChangedEvent2 = "";
+    var _self = this;
+    if (!storeInfo.editorChoice) storeInfo.editorChoice = false;
+    if (!storeInfo.topStore) storeInfo.topStore = false;
+    storeInfo.storeURL = storeInfo.name.replace(/ /g, "-").toLowerCase();
+    const formData = new FormData();
+    for (var key in storeInfo) {
+      formData.append(key, storeInfo[key]);
+    }
+    formData.append("uploadFile", this.selectedImage);
+    this._http
+      .post("/api/addStore", formData)
+      .then((result: Response) => {
+        _self._dataService.showSuccessToast("Store added successfully");
+        _self.storeInfo = { rating: 1 };
+        _self.imgModel = "";
+        _self.imgModel2 = "";
+        _self.croppedImage = "";
+        _self.croppedImage2 = "";
+        _self.selectedImage = "";
+        _self.selectedImage2 = "";
+        _self.imageChangedEvent = "";
+        _self.imageChangedEvent2 = "";
         window.scrollTo(0, 0);
-        this.isBusy = false;
-      } else this._dataService.showErrorToast(res.message);
-    });
+        _self.isBusy = false;
+      })
+      .catch((error: Response) => {
+        this._dataService.showErrorToast(error.error.message);
+      });
   }
+  // upoloadThumbImg(storeInfo) {
+  //   var self = this;
+  //   var filePath2 = `storeThumbImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath2, this.selectedImage2, function (error, data) {
+  //       if (error) {
+  //         this._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         storeInfo.thumbImg = data;
+  //         self.saveStoreToDB(storeInfo);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+
+  // saveStoreToDB(storeNode) {
+
+  // }
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
@@ -189,13 +190,17 @@ export class AddStoreComponent implements OnDestroy {
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.selectedImage = base64ToFile(event.base64);
+    this.selectedImage = this._dataService.base64ToFile(
+      event.base64,
+      this.imageChangedEvent.target.files[0].name
+    );
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedImage);
     reader.onloadend = () => {
       this.croppedImage = reader.result;
     };
   }
+  
   imageCropped2(event: ImageCroppedEvent) {
     this.selectedImage2 = base64ToFile(event.base64);
     var reader = new FileReader();

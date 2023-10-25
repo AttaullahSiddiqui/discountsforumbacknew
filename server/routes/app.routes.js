@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+let upload = require("../utils/multer.service");
+let cloudinaryStore = require("../utils/cloudinary.service");
 let apiCtrl = require("../api/api.ctrl");
 let fetchCtrl = require("../api/fetch.ctrl");
 let dltCtrl = require("../api/delete.ctrl");
@@ -18,11 +20,21 @@ router.get("/countProducts", sortCtrl.countProducts);
 router.get("/countUsers", sortCtrl.countUsers);
 
 router.post("/createCategory", apiCtrl.createCategory);
-router.post("/addStore", apiCtrl.addStore);
+router.post(
+  "/addStore",
+  upload.single("uploadFile"),
+  cloudinaryStore,
+  apiCtrl.addStore
+);
 router.post("/addCoupon", apiCtrl.addCoupon);
 router.post("/addDeal", apiCtrl.addDeal);
 router.post("/addBlog", apiCtrl.addBlog);
-router.post("/addSlide", apiCtrl.addSlide);
+router.post(
+  "/addSlide",
+  upload.single("uploadFile"),
+  cloudinaryStore,
+  apiCtrl.addSlide
+);
 router.post("/addBanner", apiCtrl.addBanner);
 router.post("/addPostImage", apiCtrl.addPostImage);
 router.post("/addProduct", apiCtrl.addProduct);
@@ -50,7 +62,12 @@ router.get("/fetchBrandData", fetchCtrl.fetchBrandData);
 
 router.post("/editUser", putCtrl.editUser);
 router.post("/editCategory", putCtrl.editCategory);
-router.post("/editStore", putCtrl.editStore);
+router.post(
+  "/editStore",
+  upload.single("uploadFile"),
+  cloudinaryStore,
+  putCtrl.editStore
+);
 router.post("/editCoupon", putCtrl.editCoupon);
 router.post("/editBlog", putCtrl.editBlog);
 router.post("/updateBanner", putCtrl.updateBanner);

@@ -8,6 +8,7 @@ let storeSchema = mongoose.Schema({
   shortDes: { type: String, required: true },
   longDes: { type: String, required: true },
   img: { type: String, required: true },
+  imgPublicId: { type: String, required: true },
   imgAlt: { type: String, required: true },
   directUrl: { type: String, required: true },
   trackUrl: { type: String, required: true },
