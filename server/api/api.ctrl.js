@@ -13,7 +13,7 @@ let BlogItem = require("../Models/blogItems.model");
 let Slider = require("../Models/slide.model");
 let errHandler = require("../utils/errorHandler");
 let resHandler = require("../utils/responseHandler");
-const cloudinary = require("../utils/cloudinary");
+let dltCtrl = require("./delete.ctrl");
 
 module.exports = {
   authUser: authUser,
@@ -486,7 +486,7 @@ function updateSlide(req, res) {
       else if (!updatedNode)
         res.json(resHandler.respondError("Unknown error occured", -3));
       else{
-        if (imgPublicId)deleteCloudinaryImage(imgPublicId);
+        if (imgPublicId)dltCtrl.deleteCloudinaryImage(imgPublicId);
           res.json(
             resHandler.respondSuccess(
               updatedNode,
@@ -497,11 +497,4 @@ function updateSlide(req, res) {
       }
     }
   );
-}
-function deleteCloudinaryImage(imgPublicId) {
-  cloudinary.uploader
-    .destroy(imgPublicId, {
-      invalidate: true,
-    })
-    .then((result) => console.log(result));
 }

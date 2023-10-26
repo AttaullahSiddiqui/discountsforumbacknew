@@ -69,7 +69,12 @@ router.post(
   putCtrl.editStore
 );
 router.post("/editCoupon", putCtrl.editCoupon);
-router.post("/editBlog", putCtrl.editBlog);
+router.post(
+  "/editBlog",
+  upload.single("uploadFile"),
+  cloudinaryStore,
+  putCtrl.editBlog
+);
 router.post("/updateBanner", putCtrl.updateBanner);
 router.post("/updatePostImage", putCtrl.updatePostImage);
 router.post("/updateProduct", putCtrl.updateProduct);

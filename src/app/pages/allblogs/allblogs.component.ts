@@ -6,6 +6,7 @@ import {
 } from "@angular/core";
 import { DataService } from "../../@core/utils/data.service";
 import { LocalDataSource } from "ng2-smart-table";
+import { HttpService, Response } from "../../@core/utils/http.service";
 import {
   CustomRenderComponent,
   showImageComponent,
@@ -288,7 +289,8 @@ export class AllBlogsComponent {
     private _dataService: DataService,
     private windowService: NbWindowService,
     private dialogService: NbDialogService,
-    private _utlityService: UtilityService
+    private _utlityService: UtilityService,
+    private _http: HttpService
   ) {
     this.getBlogsFunc();
   }
@@ -331,244 +333,264 @@ export class AllBlogsComponent {
   saveEditedBlog(editNode) {
     if (this.isUpdating) return;
     this.isUpdating = true;
-    var self = this;
-    if (this.croppedImage) {
-      var filePath = `blogImages/_${new Date().getTime()}`;
-      this._dataService
-        .storeImage(filePath, this.selectedImage, function (error, data) {
-          if (error) {
-            this._dataService.showErrorToast(
-              "Can't upload image to the Server"
-            );
-            return;
-          }
-          if (data) {
-            self._dataService.deleteMedia(editNode.img);
-            editNode.img = data;
-            self.funcForMiddle1(editNode);
-          }
-        })
-        .subscribe();
-    } else self.funcForMiddle1(editNode);
-  }
-  funcForMiddle1(editNode) {
-    if (!this.selectedImage1) {
-      this.funcForMiddle2(editNode);
-      return;
+    editNode.author = this._utlityService.getAuthor();
+    editNode.blogURL = editNode.title.replace("?", "").toLowerCase();
+    editNode.blogURL = editNode.blogURL.replace(/ /g, "-").toLowerCase();
+    const formData = new FormData();
+    for (var key in editNode) {
+      formData.append(key, editNode[key]);
     }
+    formData.append("uploadFile", this.selectedImage);
     var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage1, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid1 = data;
-          self.funcForMiddle2(editNode);
-        }
+    this._http
+      .post("/api/editBlog", formData)
+      .then((result: Response) => {
+        self._dataService.showSuccessToast("Blog updated successfully");
+        self.blogArray[this.editKey] = result.body.data;
+        self.isUpdating = false;
+        self.clearCroppedImage1();
+        self.clearCroppedImage();
       })
-      .subscribe();
+      .catch((error: Response) => {
+        self._dataService.showErrorToast(error.error.message);
+      });
+    // if (this.croppedImage) {
+    //   var filePath = `blogImages/_${new Date().getTime()}`;
+    //   this._dataService
+    //     .storeImage(filePath, this.selectedImage, function (error, data) {
+    //       if (error) {
+    //         this._dataService.showErrorToast(
+    //           "Can't upload image to the Server"
+    //         );
+    //         return;
+    //       }
+    //       if (data) {
+    //         self._dataService.deleteMedia(editNode.img);
+    //         editNode.img = data;
+    //         self.funcForMiddle1(editNode);
+    //       }
+    //     })
+    //     .subscribe();
+    // } else self.funcForMiddle1(editNode);
   }
-  funcForMiddle2(editNode) {
-    if (!this.selectedImage2) {
-      this.funcForMiddle3(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage2, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid2 = data;
-          self.funcForMiddle3(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle3(editNode) {
-    if (!this.selectedImage3) {
-      this.funcForMiddle4(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage3, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid3 = data;
-          self.funcForMiddle4(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle4(editNode) {
-    if (!this.selectedImage4) {
-      this.funcForMiddle5(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage4, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid4 = data;
-          self.funcForMiddle5(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle5(editNode) {
-    if (!this.selectedImage5) {
-      this.funcForMiddle6(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage5, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid5 = data;
-          self.funcForMiddle6(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle6(editNode) {
-    if (!this.selectedImage6) {
-      this.funcForMiddle7(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage6, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid6 = data;
-          self.funcForMiddle7(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle7(editNode) {
-    if (!this.selectedImage7) {
-      this.funcForMiddle8(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage7, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid7 = data;
-          self.funcForMiddle8(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle8(editNode) {
-    if (!this.selectedImage8) {
-      this.funcForMiddle9(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage8, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid8 = data;
-          self.funcForMiddle9(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle9(editNode) {
-    if (!this.selectedImage9) {
-      this.funcForMiddle10(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage9, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid9 = data;
-          self.funcForMiddle10(editNode);
-        }
-      })
-      .subscribe();
-  }
-  funcForMiddle10(editNode) {
-    if (!this.selectedImage10) {
-      this.editCallbackFunc(editNode);
-      return;
-    }
-    var self = this;
-    var filePath = `blogImages/_${new Date().getTime()}`;
-    this._dataService
-      .storeImage(filePath, this.selectedImage10, function (error, data) {
-        if (error) {
-          self._dataService.showErrorToast("Can't upload image to the Server");
-          return;
-        }
-        if (data) {
-          editNode.imgGrid10 = data;
-          self.editCallbackFunc(editNode);
-        }
-      })
-      .subscribe();
-  }
-  editCallbackFunc(editData) {
-    editData.author = this._utlityService.getAuthor();
-    editData.blogURL = editData.title.replace("?", "").toLowerCase();
-    editData.blogURL = editData.blogURL.replace(/ /g, "-").toLowerCase();
-    this.clearCroppedImage();
-    this.clearCroppedImage1();
-    this._dataService.postAPI("/api/editBlog", editData).subscribe((res) => {
-      if (res.data) {
-        this._dataService.showSuccessToast(res.message);
-        this.blogArray[this.editKey] = res.data;
-        this.isUpdating = false;
-        this.clearCroppedImage1();
-        this.clearCroppedImage();
-      } else {
-        this._dataService.showErrorToast(res.message);
-      }
-    });
-  }
+  // funcForMiddle1(editNode) {
+  //   if (!this.selectedImage1) {
+  //     this.funcForMiddle2(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage1, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid1 = data;
+  //         self.funcForMiddle2(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle2(editNode) {
+  //   if (!this.selectedImage2) {
+  //     this.funcForMiddle3(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage2, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid2 = data;
+  //         self.funcForMiddle3(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle3(editNode) {
+  //   if (!this.selectedImage3) {
+  //     this.funcForMiddle4(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage3, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid3 = data;
+  //         self.funcForMiddle4(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle4(editNode) {
+  //   if (!this.selectedImage4) {
+  //     this.funcForMiddle5(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage4, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid4 = data;
+  //         self.funcForMiddle5(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle5(editNode) {
+  //   if (!this.selectedImage5) {
+  //     this.funcForMiddle6(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage5, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid5 = data;
+  //         self.funcForMiddle6(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle6(editNode) {
+  //   if (!this.selectedImage6) {
+  //     this.funcForMiddle7(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage6, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid6 = data;
+  //         self.funcForMiddle7(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle7(editNode) {
+  //   if (!this.selectedImage7) {
+  //     this.funcForMiddle8(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage7, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid7 = data;
+  //         self.funcForMiddle8(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle8(editNode) {
+  //   if (!this.selectedImage8) {
+  //     this.funcForMiddle9(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage8, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid8 = data;
+  //         self.funcForMiddle9(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle9(editNode) {
+  //   if (!this.selectedImage9) {
+  //     this.funcForMiddle10(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage9, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid9 = data;
+  //         self.funcForMiddle10(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // funcForMiddle10(editNode) {
+  //   if (!this.selectedImage10) {
+  //     this.editCallbackFunc(editNode);
+  //     return;
+  //   }
+  //   var self = this;
+  //   var filePath = `blogImages/_${new Date().getTime()}`;
+  //   this._dataService
+  //     .storeImage(filePath, this.selectedImage10, function (error, data) {
+  //       if (error) {
+  //         self._dataService.showErrorToast("Can't upload image to the Server");
+  //         return;
+  //       }
+  //       if (data) {
+  //         editNode.imgGrid10 = data;
+  //         self.editCallbackFunc(editNode);
+  //       }
+  //     })
+  //     .subscribe();
+  // }
+  // editCallbackFunc(editData) {
+  //   editData.author = this._utlityService.getAuthor();
+  //   editData.blogURL = editData.title.replace("?", "").toLowerCase();
+  //   editData.blogURL = editData.blogURL.replace(/ /g, "-").toLowerCase();
+  //   this.clearCroppedImage();
+  //   this.clearCroppedImage1();
+  //   this._dataService.postAPI("/api/editBlog", editData).subscribe((res) => {
+  //     if (res.data) {
+  //       this._dataService.showSuccessToast(res.message);
+  //       this.blogArray[this.editKey] = res.data;
+  //       this.isUpdating = false;
+  //       this.clearCroppedImage1();
+  //       this.clearCroppedImage();
+  //     } else {
+  //       this._dataService.showErrorToast(res.message);
+  //     }
+  //   });
+  // }
 
   fileChangeEvent(event: any, ind?): void {
     this.ngForImgInd = ind;
@@ -577,11 +599,24 @@ export class AllBlogsComponent {
   }
 
   imageCropped(event: ImageCroppedEvent, scndInd?) {
+    this.selectedImage = this._dataService.base64ToFile(
+      event.base64,
+      this.imageChangedEvent.target.files[0].name
+    );
+    var reader = new FileReader();
+    reader.readAsDataURL(this.selectedImage);
+    reader.onloadend = () => {
+      this.croppedImage = reader.result;
+    };
+
     var imgFile = base64ToFile(event.base64);
     var abcd = this.ngForImgInd || scndInd;
     abcd
       ? this.setSelectedImage(abcd, imgFile)
-      : (this.selectedImage = imgFile);
+      : (this.selectedImage = this._dataService.base64ToFile(
+          event.base64,
+          this.imageChangedEvent.target.files[0].name
+        ));
     var reader = new FileReader();
     reader.readAsDataURL(imgFile);
     reader.onloadend = () => {

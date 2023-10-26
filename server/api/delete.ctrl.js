@@ -10,6 +10,7 @@ let Product = require("../Models/product.model");
 let blogComments = require("../Models/blogcomments.model");
 let resHandler = require("../utils/responseHandler");
 const cloudinary = require("../utils/cloudinary");
+var fs = require("fs");
 
 module.exports = {
   deleteCategory: deleteCategory,
@@ -22,6 +23,7 @@ module.exports = {
   deleteProduct: deleteProduct,
   deleteBlogItem: deleteBlogItem,
   deleteBlogComment: deleteBlogComment,
+  deleteCloudinaryImage: deleteCloudinaryImage,
 };
 
 function deleteCategory(req, res) {
@@ -184,4 +186,12 @@ function deleteCloudinaryImage(imgPublicId) {
       invalidate: true,
     })
     .then((result) => console.log(result));
+  var multerFileLocation = imgPublicId.replace("discountsforum/", "");
+  fs.unlink("files/images/" + multerFileLocation, function (err) {
+    if (err) {
+      console.log("unlink failed", err);
+    } else {
+      console.log("unlink succeeded");
+    }
+  });
 }

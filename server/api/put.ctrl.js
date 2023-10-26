@@ -12,7 +12,7 @@ let BlogItem = require("../Models/blogItems.model");
 let Settings = require("../Models/settings.model");
 let blogComments = require("../Models/blogcomments.model");
 let resHandler = require("../utils/responseHandler");
-const cloudinary = require("../utils/cloudinary");
+let dltCtrl = require("./delete.ctrl");
 
 module.exports = {
   editCategory: editCategory,
@@ -88,7 +88,7 @@ function editStore(req, res) {
       else if (!updatedNode)
         res.json(resHandler.respondError("Wrong format provided", -3));
       else {
-        if (imgPublicId) deleteCloudinaryImage(imgPublicId);
+        if (imgPublicId) dltCtrl.deleteCloudinaryImage(imgPublicId);
         Coupon.updateMany(
           { storeId: req.body._id },
           { trackingLink: req.body.trackUrl },
@@ -107,6 +107,12 @@ function editStore(req, res) {
   );
 }
 function editBlog(req, res) {
+  var imgPublicId = req.body.imgPublicId;
+  delete req.body.imgPublicId;
+  if (req.imgURI) {
+    req.body.img = req.imgURI;
+    req.body.imgPublicId = req.imgPublicId;
+  }
   Blog.findByIdAndUpdate(
     req.body._id,
     req.body,
@@ -115,10 +121,12 @@ function editBlog(req, res) {
       if (err) res.json(resHandler.respondError(err[0], err[1] || -1));
       else if (!updatedNode)
         res.json(resHandler.respondError("Wrong format provided", -3));
-      else
+      else {
+        if (imgPublicId) dltCtrl.deleteCloudinaryImage(imgPublicId);
         res.json(
           resHandler.respondSuccess(updatedNode, "Blog updated successfully", 2)
         );
+      }
     }
   );
 }
@@ -315,11 +323,4 @@ function approveBlogComment(req, res) {
         );
     }
   );
-}
-function deleteCloudinaryImage(imgPublicId) {
-  cloudinary.uploader
-    .destroy(imgPublicId, {
-      invalidate: true,
-    })
-    .then((result) => console.log(result));
 }
